@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facilitator Portal — The Hub Vault</title>
+  <meta name="description" content="Hub management guide: setting up repositories, weekly reporting, monitoring student commits, giving feedback, and guidance for sponsors." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('hub-vault-theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">🗄️ The <span>Hub Vault</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+      <a href="index.html">🏠 Home</a>
+      <a href="student-zone.html">🎓 Students</a>
+      <a href="facilitator-portal.html">🏢 Facilitators</a>
+      <a href="cheat-sheet.html">📋 Cheat Sheet</a>
+    </nav>
+  </header>
+
+  <!-- ── Page Header ────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">Facilitator Portal</p>
+      <h1>Managing the Hub</h1>
+      <p>
+        Your guide to setting up the hub's GitHub presence, running the weekly reporting cycle, monitoring student submissions, and communicating with sponsors professionally.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Quick Nav ──────────────────────────────────────── -->
+  <section class="section" style="padding-top: 32px; padding-bottom: 32px;">
+    <div class="container">
+      <div class="card-grid" style="gap: 12px;">
+        <a href="#hub-organization" class="card" style="text-align:center; text-decoration:none;">
+          <span class="card-icon">🏗️</span>
+          <h4>1. Hub Organization</h4>
+        </a>
+        <a href="#reporting-cycle" class="card" style="text-align:center; text-decoration:none;">
+          <span class="card-icon">📅</span>
+          <h4>2. Reporting Cycle</h4>
+        </a>
+        <a href="#monitoring-progress" class="card" style="text-align:center; text-decoration:none;">
+          <span class="card-icon">🔍</span>
+          <h4>3. Monitoring Progress</h4>
+        </a>
+        <a href="#feedback" class="card" style="text-align:center; text-decoration:none;">
+          <span class="card-icon">💬</span>
+          <h4>4. Feedback</h4>
+        </a>
+        <a href="#sponsor-view" class="card" style="text-align:center; text-decoration:none; border-color: var(--accent);">
+          <span class="card-icon">👔</span>
+          <h4>Sponsor View</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Step 1: Hub Organization ──────────────────────── -->
+  <section class="section section-alt" id="hub-organization">
+    <div class="container">
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <p class="section-label">Step One</p>
+            <h2 class="section-title">Hub Organization — Setting the Standard</h2>
+            <p>
+              Every hub in Zimbabwe should have its own GitHub repository. This is the hub's official home on GitHub — where all reports, facilitator updates, and evidence of activity live.
+            </p>
+
+            <h3 style="margin: 24px 0 12px;">Repository Naming Convention</h3>
+            <p>Consistency matters. Use this naming format across all hubs:</p>
+
+            <div class="table-wrap" style="margin: 16px 0;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Hub Name</th>
+                    <th>Repository Name</th>
+                    <th>Example URL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mosi-oa-Tunya Hub</td>
+                    <td><code>MosiHub-Cohort-2026</code></td>
+                    <td><code>github.com/[org]/MosiHub-Cohort-2026</code></td>
+                  </tr>
+                  <tr>
+                    <td>Harare Hub</td>
+                    <td><code>HarareHub-Cohort-2026</code></td>
+                    <td><code>github.com/[org]/HarareHub-Cohort-2026</code></td>
+                  </tr>
+                  <tr>
+                    <td>Bulawayo Hub</td>
+                    <td><code>BulawayoHub-Cohort-2026</code></td>
+                    <td><code>github.com/[org]/BulawayoHub-Cohort-2026</code></td>
+                  </tr>
+                  <tr>
+                    <td>Mutare Hub</td>
+                    <td><code>MutareHub-Cohort-2026</code></td>
+                    <td><code>github.com/[org]/MutareHub-Cohort-2026</code></td>
+                  </tr>
+                  <tr>
+                    <td>Gweru Hub</td>
+                    <td><code>GweruHub-Cohort-2026</code></td>
+                    <td><code>github.com/[org]/GweruHub-Cohort-2026</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card-grid-2" style="margin-top: 20px;">
+              <div class="card">
+                <h4>✅ Make it Public</h4>
+                <p>Keep the hub repository <strong>Public</strong>. Sponsors need to see the work without needing a GitHub account or a technical walkthrough. Public means accessible.</p>
+              </div>
+              <div class="card">
+                <h4>📁 Suggested Folder Structure</h4>
+                <p>Inside the repo, create folders by uploading files into named paths:</p>
+                <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 8px;">
+                  <li><code>reports/</code> — weekly facilitator PDFs</li>
+                  <li><code>students/</code> — student work (or link to student repos)</li>
+                  <li><code>photos/</code> — hub activity images</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="img-placeholder" style="margin-top: 20px;">
+              [IMAGE: GitHub repository setup page on iPad Safari — showing the repository name field set to "HarareHub-Cohort-2026" with Public selected]
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Step 2: Reporting Cycle ────────────────────────── -->
+  <section class="section" id="reporting-cycle">
+    <div class="container">
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <p class="section-label">Step Two</p>
+            <h2 class="section-title">The Reporting Cycle — Sponsor Transparency</h2>
+            <p>
+              The Friday report is the single most important thing you upload each week. It is your proof of activity, your professional communication to sponsors, and your contribution to the MCRI visibility record.
+            </p>
+
+            <div class="card" style="margin: 20px 0; border-left: 3px solid var(--accent);">
+              <h4>The Friday Workflow</h4>
+              <ol style="margin-top: 12px; color: var(--text-secondary);">
+                <li>Write your weekly facilitator report in Keynote or Pages</li>
+                <li>Export it as a PDF (same process as students — see <a href="student-zone.html#step-3">Student Zone Step 3</a>)</li>
+                <li>Name it clearly: <code>Week-12-HarareHub-Report.pdf</code></li>
+                <li>Upload it to the <code>reports/</code> folder in your hub repository</li>
+                <li>Write a commit message: <em>"Week 12 report — 14 students active, Swift Level 3 completed"</em></li>
+                <li>Tap <strong>Commit changes</strong></li>
+              </ol>
+            </div>
+
+            <div class="callout">
+              <strong>📧 Stop Emailing Attachments</strong>
+              Instead of attaching the PDF to an email, send the sponsor the <strong>URL of your repository</strong>. It shows them all reports in one place, demonstrates you use professional tools, and never fills up anyone's inbox.
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+              <h4>What to Include in Every Report</h4>
+              <ul style="color: var(--text-secondary); margin-top: 8px;">
+                <li>Number of students present that week</li>
+                <li>Topic or module covered</li>
+                <li>Any challenges or support needed</li>
+                <li>A brief highlight (e.g., "Tariro finished her first app prototype")</li>
+                <li>Photos of the session (if possible)</li>
+              </ul>
+            </div>
+
+            <div class="img-placeholder" style="margin-top: 20px;">
+              [IMAGE: GitHub repository "reports/" folder on iPad Safari — showing multiple weekly PDF reports listed with their commit timestamps]
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Step 3: Monitoring Progress ───────────────────── -->
+  <section class="section section-alt" id="monitoring-progress">
+    <div class="container">
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <p class="section-label">Step Three</p>
+            <h2 class="section-title">Monitoring Progress — The Activity Feed</h2>
+            <p>
+              GitHub gives you a built-in attendance sheet for free. Every time a student uploads their work, it is recorded with a timestamp. These are called <strong>Commits</strong> — and they are the receipts.
+            </p>
+
+            <div class="card" style="margin: 20px 0; border-left: 3px solid var(--accent);">
+              <h4>How to Check a Student's Commits</h4>
+              <ol style="margin-top: 12px; color: var(--text-secondary);">
+                <li>Go to the student's repository (e.g., <code>github.com/TendaiMoyo/My-Swift-Journey</code>)</li>
+                <li>Look for the <strong>Commits</strong> count near the top of the file list</li>
+                <li>Tap it to open the full commit history</li>
+                <li>Each entry shows: the commit message, the date, and the time</li>
+              </ol>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: GitHub repository commits tab on iPad Safari — showing a list of commits with student names, descriptions, and timestamps visible]
+            </div>
+
+            <div class="card-grid" style="margin-top: 20px;">
+              <div class="card">
+                <span class="card-icon">📅</span>
+                <h4>Checking Consistency</h4>
+                <p>A student who commits every week has a clear record of discipline. A student with no commits for 3 weeks needs a check-in conversation — the evidence is right there.</p>
+              </div>
+              <div class="card">
+                <span class="card-icon">🕐</span>
+                <h4>The Timestamp is the Proof</h4>
+                <p>GitHub records the exact date and time of every upload. "I did the work" is unprovable. A commit timestamped Tuesday at 2:47 PM is not.</p>
+              </div>
+            </div>
+
+            <div class="callout" style="margin-top: 20px;">
+              <strong>💡 Facilitator Tip</strong>
+              At the start of each session, pull up the student's commit history on a shared screen. Showing students their own timeline of growth is one of the most powerful motivational tools you have.
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Step 4: Feedback ───────────────────────────────── -->
+  <section class="section" id="feedback">
+    <div class="container">
+      <ul class="steps-list">
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">4</div>
+          </div>
+          <div class="step-content">
+            <p class="section-label">Step Four</p>
+            <h2 class="section-title">Feedback — Using GitHub Issues</h2>
+            <p>
+              GitHub Issues is a built-in commenting system. Use it to leave structured, professional feedback directly on a student's repository — so they have a written record of their growth.
+            </p>
+
+            <div class="card" style="margin: 20px 0; border-left: 3px solid var(--accent);">
+              <h4>How to Leave Feedback via Issues</h4>
+              <ol style="margin-top: 12px; color: var(--text-secondary);">
+                <li>Go to the student's repository</li>
+                <li>Tap the <strong>Issues</strong> tab at the top</li>
+                <li>Tap <strong>New issue</strong></li>
+                <li>Write a clear title: <em>"Week 4 Feedback — Loops Presentation"</em></li>
+                <li>Write your feedback in the body</li>
+                <li>Tap <strong>Submit new issue</strong></li>
+              </ol>
+            </div>
+
+            <div class="card-grid" style="margin-top: 16px;">
+              <div class="card">
+                <h4>✅ Good Feedback</h4>
+                <p style="font-style: italic; color: var(--text-secondary);">"Great job on the Loops slide — the animation made the concept clear. For next time, try adding a real-world example, like a shopping cart counting items."</p>
+              </div>
+              <div class="card">
+                <h4>❌ Unhelpful Feedback</h4>
+                <p style="font-style: italic; color: var(--text-secondary);">"Good work. Keep it up."</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">This gives the student nothing to act on.</p>
+              </div>
+            </div>
+
+            <div class="img-placeholder" style="margin-top: 20px;">
+              [IMAGE: GitHub Issues page on iPad Safari — showing a new issue being written with a title and feedback body visible]
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Sponsor & Hire-Up View ─────────────────────────── -->
+  <section class="section section-alt" id="sponsor-view">
+    <div class="container">
+      <div class="sponsor-card">
+        <p class="section-label">Sponsor &amp; Hire-Up View</p>
+        <h2>The Glass Window</h2>
+        <p>
+          This section is for sponsors, MCRI staff, and anyone who wants to observe hub progress without needing a GitHub account or any technical knowledge.
+        </p>
+
+        <div class="card-grid" style="margin: 24px 0;">
+
+          <div class="card">
+            <span class="card-icon">🔗</span>
+            <h3>How to Access a Hub</h3>
+            <p>
+              Ask your facilitator for the <strong>repository URL</strong>. It looks like:<br/>
+              <code style="word-break: break-all;">github.com/[org]/HarareHub-Cohort-2026</code>
+            </p>
+            <p>Open that URL in any web browser. No login needed.</p>
+          </div>
+
+          <div class="card">
+            <span class="card-icon">📂</span>
+            <h3>What You Will See</h3>
+            <p>
+              A file list showing all uploaded reports, student work folders, and activity photos. Click any <strong>PDF file</strong> to view it directly in your browser — no download required.
+            </p>
+          </div>
+
+          <div class="card">
+            <span class="card-icon">📊</span>
+            <h3>Reading the Activity</h3>
+            <p>
+              The <strong>Commits</strong> count (visible near the file list) shows total uploads. Click it to see every upload — who, what, and when. This is the live pulse of the hub.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="callout" style="margin-top: 0;">
+          <strong>The Impact</strong>
+          You are not just funding a workshop. You are watching the birth of a developer ecosystem in real-time. Every commit is a student who showed up, did the work, and left a permanent record of their growth.
+        </div>
+
+        <div class="img-placeholder" style="margin-top: 20px;">
+          [IMAGE: GitHub repository home page in a desktop browser — showing the file list, README, and the Commits count clearly labelled]
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">🗄️ The <span>Hub Vault</span></div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+        <p class="footer-copy">
+          A resource for Zimbabwe Innovation Hubs × Matter Career Readiness Institute (MCRI). Built for GitHub Pages.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

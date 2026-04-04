@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Zone — The Hub Vault</title>
+  <meta name="description" content="Step-by-step guide for students: set up GitHub, create your repository, export Keynote as PDF, and upload your work from your iPad." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('hub-vault-theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">🗄️ The <span>Hub Vault</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+      <a href="index.html">🏠 Home</a>
+      <a href="student-zone.html">🎓 Students</a>
+      <a href="facilitator-portal.html">🏢 Facilitators</a>
+      <a href="cheat-sheet.html">📋 Cheat Sheet</a>
+    </nav>
+  </header>
+
+  <!-- ── Page Header ────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">Student Zone</p>
+      <h1>Your Digital Journey</h1>
+      <p>
+        Four steps to go from a Keynote on your iPad to a professional GitHub profile that represents who you are and what you can do.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Critical Warning ───────────────────────────────── -->
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="callout callout-warning">
+        <strong>⚠️ Read This First</strong>
+        iPads are wiped at the end of every cohort. If your work is only on the iPad, it will be gone. If it is on GitHub, it lives forever. This is not optional — this is how we protect your progress.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4-Step Pipeline ────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">The Pipeline</p>
+      <h2 class="section-title">Four Steps to the Vault</h2>
+      <p class="section-subtitle">Follow these in order. The first time takes 20 minutes. After that, it takes 5.</p>
+
+      <ul class="steps-list" style="margin-top: 2rem;">
+
+        <!-- Step 1 -->
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">1</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>The Account — Your Professional Identity</h3>
+            <p>
+              Go to <strong>github.com</strong> in Safari on your iPad and create a free account. Your username is permanent and public — choose it carefully.
+            </p>
+
+            <div class="card" style="margin: 16px 0;">
+              <h4>Choosing your username</h4>
+              <ul style="margin-top: 8px; color: var(--text-secondary);">
+                <li>✅ <code>TendaiMoyo</code> — professional, identifiable</li>
+                <li>✅ <code>Tendai-Dev</code> — clean, memorable</li>
+                <li>❌ <code>coolkid99</code> — unprofessional</li>
+                <li>❌ <code>xXxTendaixXx</code> — hard to take seriously</li>
+              </ul>
+            </div>
+
+            <p>
+              After signing up, complete your profile:
+            </p>
+            <ul style="color: var(--text-secondary);">
+              <li>Upload a <strong>clear headshot</strong> (not a cartoon, not a logo)</li>
+              <li>Write a bio: <em>"Student at [Hub Name] | Aspiring Swift Developer"</em></li>
+              <li>Add your location: Zimbabwe</li>
+            </ul>
+
+            <div class="img-placeholder">
+              [IMAGE: GitHub profile setup screen on iPad Safari — showing the bio, photo upload, and location fields]
+            </div>
+          </div>
+        </li>
+
+        <!-- Step 2 -->
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">2</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>The Repository — Your Project Box</h3>
+            <p>
+              A <strong>repository</strong> (repo) is a folder on GitHub that holds all the files for one project. You will create one for your learning journey.
+            </p>
+
+            <div class="card" style="margin: 16px 0; border-left: 3px solid var(--accent);">
+              <h4>How to create your first repository</h4>
+              <ol style="margin-top: 8px; color: var(--text-secondary);">
+                <li>Tap the <strong>+</strong> icon in the top-right corner of GitHub</li>
+                <li>Select <strong>New repository</strong></li>
+                <li>Name it: <code>My-Swift-Journey</code></li>
+                <li>Set it to <strong>Public</strong></li>
+                <li>Tick <strong>"Add a README file"</strong></li>
+                <li>Tap <strong>Create repository</strong></li>
+              </ol>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: GitHub "New Repository" form on iPad Safari — showing the name field set to "My-Swift-Journey" and the Public/README options]
+            </div>
+
+            <div class="callout" style="margin-top: 16px;">
+              <strong>Write your README</strong>
+              Your README is the front cover of your project. Open it and write 2 sentences: what you are learning and why. Example: <em>"Tracking my progress in Swift Learn to Code 1 &amp; 2. I am building towards a career in iOS development at the Matter Career Readiness Institute."</em>
+            </div>
+          </div>
+        </li>
+
+        <!-- Step 3 -->
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">3</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>The iPad-to-GitHub Pipeline — The Workflow</h3>
+            <p>
+              This is the most important step. Your Keynote file cannot be read by everyone — but a PDF can. You must export to PDF every time before uploading.
+            </p>
+
+            <div class="callout callout-warning">
+              <strong>⚠️ Critical: Always Export as PDF</strong>
+              A Keynote file only opens in Keynote. A PDF opens in any browser, on any device, anywhere in the world — including in a sponsor's browser. This is the only format that guarantees your work is readable.
+            </div>
+
+            <div class="card" style="margin: 16px 0;">
+              <h4>Step A — Export from Keynote</h4>
+              <ol style="margin-top: 8px; color: var(--text-secondary);">
+                <li>Open your presentation in <strong>Keynote</strong></li>
+                <li>Tap the <strong>three dots (···)</strong> in the top-right</li>
+                <li>Tap <strong>Export</strong></li>
+                <li>Choose <strong>PDF</strong></li>
+                <li>Select quality: <strong>Good</strong> (not Best — keeps file size small)</li>
+                <li>Tap <strong>Export</strong> again</li>
+              </ol>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: iPad Keynote Share Sheet — showing the Export option with PDF highlighted and the quality selector set to "Good"]
+            </div>
+
+            <div class="card" style="margin: 16px 0;">
+              <h4>Step B — Save to Files</h4>
+              <ol style="margin-top: 8px; color: var(--text-secondary);">
+                <li>When the export finishes, tap <strong>Save to Files</strong></li>
+                <li>Choose <strong>On My iPad</strong> or <strong>iCloud Drive</strong></li>
+                <li>Give it a clear name: <code>Swift-Level5-TendaiMoyo.pdf</code></li>
+                <li>Tap <strong>Save</strong></li>
+              </ol>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: iPad Files app — showing the PDF saved in the "On My iPad" folder with a clear filename]
+            </div>
+
+            <div class="card" style="margin: 16px 0;">
+              <h4>Step C — Upload to GitHub</h4>
+              <ol style="margin-top: 8px; color: var(--text-secondary);">
+                <li>Open <strong>Safari</strong> and go to your GitHub repository</li>
+                <li>Tap <strong>Add file</strong> → <strong>Upload files</strong></li>
+                <li>Tap <strong>choose your files</strong></li>
+                <li>Navigate to your PDF in Files and select it</li>
+                <li>Scroll down — you will see the <strong>Commit</strong> section</li>
+              </ol>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: GitHub repository on iPad Safari — showing the "Add file" dropdown and the "Upload files" option]
+            </div>
+          </div>
+        </li>
+
+        <!-- Step 4 -->
+        <li class="step-item">
+          <div class="step-connector">
+            <div class="step-number">4</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-content">
+            <h3>The Commit — The Save With a Label</h3>
+            <p>
+              A <strong>commit</strong> is a permanent save point. It records what you uploaded and <em>when</em>. This timestamp is your receipt — proof that you did the work on that date.
+            </p>
+
+            <div class="card" style="margin: 16px 0; border-left: 3px solid var(--accent);">
+              <h4>Writing a good commit message</h4>
+              <p style="margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">Always describe what you did, not just "upload".</p>
+              <ul style="margin-top: 8px; color: var(--text-secondary);">
+                <li>✅ <code>"Finished Blue's Adventure Level 5 — Loops chapter"</code></li>
+                <li>✅ <code>"Week 3 presentation — Variables and Functions"</code></li>
+                <li>❌ <code>"upload"</code></li>
+                <li>❌ <code>"stuff"</code></li>
+                <li>❌ <code>"asdfjkl"</code></li>
+              </ul>
+            </div>
+
+            <div class="img-placeholder">
+              [IMAGE: GitHub commit message field on iPad Safari — showing a descriptive commit message typed in and the green "Commit changes" button]
+            </div>
+
+            <div class="callout">
+              <strong>✅ You Did It</strong>
+              After tapping "Commit changes", your work is in the vault. It is timestamped, permanent, and accessible from anywhere in the world. That is professionalism.
+            </div>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Mini-Challenge ─────────────────────────────────── -->
+  <section class="section section-alt">
+    <div class="container" style="max-width: 640px;">
+      <p class="section-label">Mini-Challenge</p>
+      <h2 class="section-title">Your First Week Checklist</h2>
+      <p class="section-subtitle">
+        Complete all of these before the end of your first week at the hub. Tick each one as you go.
+      </p>
+
+      <ul class="checklist">
+        <li>
+          <input type="checkbox" id="check1" />
+          <label for="check1">Created a GitHub account with a professional username</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check2" />
+          <label for="check2">Uploaded a clear headshot to your profile</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check3" />
+          <label for="check3">Written a bio that mentions your hub and your goal</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check4" />
+          <label for="check4">Created a repository named <code>My-Swift-Journey</code></label>
+        </li>
+        <li>
+          <input type="checkbox" id="check5" />
+          <label for="check5">Written a 2-sentence README in your repository</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check6" />
+          <label for="check6">Exported one Keynote presentation as a PDF (Good quality)</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check7" />
+          <label for="check7">Uploaded the PDF to your GitHub repository</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check8" />
+          <label for="check8">Written a descriptive commit message (not just "upload")</label>
+        </li>
+        <li>
+          <input type="checkbox" id="check9" />
+          <label for="check9">Shared your GitHub profile URL with your facilitator</label>
+        </li>
+      </ul>
+
+      <div class="callout" style="margin-top: 24px;">
+        <strong>🏆 Challenge Complete?</strong>
+        Show your facilitator your profile and your first commit. They will verify your work using the Commits tab — your timestamp is your proof.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Next Step CTA ──────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Stuck? The Cheat Sheet Has Your Answers.</h2>
+      <p>iPad acting up? File too big? Safari frozen? Check the troubleshooting guide.</p>
+      <div class="hero-actions">
+        <a href="cheat-sheet.html" class="btn btn-primary">Open Cheat Sheet →</a>
+        <a href="facilitator-portal.html" class="btn btn-secondary">Ask a Facilitator</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">🗄️ The <span>Hub Vault</span></div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+        <p class="footer-copy">
+          A resource for Zimbabwe Innovation Hubs × Matter Career Readiness Institute (MCRI). Built for GitHub Pages.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

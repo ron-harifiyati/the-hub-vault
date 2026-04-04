@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheat Sheet — The Hub Vault</title>
+  <meta name="description" content="Quick reference: GitHub glossary in plain English and iPad-specific troubleshooting for Safari, file sizes, and login issues." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('hub-vault-theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">🗄️ The <span>Hub Vault</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+      </nav>
+      <div class="nav-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+      <a href="index.html">🏠 Home</a>
+      <a href="student-zone.html">🎓 Students</a>
+      <a href="facilitator-portal.html">🏢 Facilitators</a>
+      <a href="cheat-sheet.html">📋 Cheat Sheet</a>
+    </nav>
+  </header>
+
+  <!-- ── Page Header ────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="container">
+      <p class="section-label">Cheat Sheet</p>
+      <h1>The Fixer</h1>
+      <p>
+        Plain-English definitions for every GitHub term, plus solutions to the most common iPad problems. Bookmark this page.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Glossary ───────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Glossary</p>
+      <h2 class="section-title">Blunt Truths</h2>
+      <p class="section-subtitle">
+        No jargon. No fluff. Here is what these words actually mean.
+      </p>
+
+      <dl class="glossary-grid">
+
+        <div class="glossary-term">
+          <dt>📁 Repository</dt>
+          <dd>A project folder on GitHub. Everything related to one project lives here — presentations, reports, images, notes. One project = one repository.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>💾 Commit</dt>
+          <dd>A permanent Save Point. When you commit, GitHub records what you uploaded, the message you wrote, and the exact time it happened. It cannot be undone silently — the history is always there.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>📖 README</dt>
+          <dd>The front cover of your repository. It is the first thing anyone sees when they open your project. Write what the project is and why it matters. Two sentences is enough to start.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🕐 Commit History</dt>
+          <dd>The full record of every save you have ever made in a repository — with timestamps. This is your proof of consistent, disciplined work. It cannot be faked.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🌿 Branch</dt>
+          <dd>A parallel version of your project where you can try something new without breaking the original. Advanced feature — students don't need this yet, but it's worth knowing the word exists.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🔀 Merge</dt>
+          <dd>Combining a branch back into the main project. Again — advanced. You'll encounter the word. Now you know what it means.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🐛 Issue</dt>
+          <dd>A built-in comment or task card on a repository. Facilitators use Issues to leave feedback on student work. Think of it as a sticky note attached to the project.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>⭐ Star</dt>
+          <dd>GitHub's equivalent of a "like." When someone stars your repository, it means they found it valuable. More stars = more visibility in the GitHub community.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🍴 Fork</dt>
+          <dd>Making your own copy of someone else's repository so you can modify it without changing the original. Useful later — ignore it for now.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🔒 Private vs Public</dt>
+          <dd>Public = anyone on the internet can see it. Private = only you (and people you invite) can see it. Hub repositories should be Public. Your personal experiments can be Private.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>📤 Push</dt>
+          <dd>Sending your local changes up to GitHub. When you're using GitHub in Safari on iPad, uploading IS pushing — the browser handles it for you automatically.</dd>
+        </div>
+
+        <div class="glossary-term">
+          <dt>🏠 Main / Master</dt>
+          <dd>The primary branch of a repository — the "real" version. When you upload directly from Safari, your files go here by default. Nothing to worry about at this stage.</dd>
+        </div>
+
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── iPad Troubleshooting ───────────────────────────── -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">iPad Troubleshooting</p>
+      <h2 class="section-title">When Things Go Wrong</h2>
+      <p class="section-subtitle">
+        These are the most common problems at the hub. Check here before asking for help.
+      </p>
+
+      <div class="trouble-card">
+        <h3>😵 Safari "Ghosting" — The Upload Button Doesn't Respond <span class="trouble-badge">Common</span></h3>
+        <p>
+          Sometimes Safari on iPad appears frozen — you tap a button and nothing happens.
+        </p>
+        <p><strong>Fix:</strong></p>
+        <ol style="color: var(--text-secondary);">
+          <li>Tap the address bar in Safari</li>
+          <li>Pull down on the page to refresh, or tap the reload icon (↺)</li>
+          <li>Try the action again</li>
+          <li>If still frozen: close Safari completely (swipe up from the bottom, swipe the Safari preview away) and reopen it</li>
+        </ol>
+        <div class="img-placeholder">
+          [IMAGE: iPad Safari with the reload/refresh button circled in the address bar]
+        </div>
+      </div>
+
+      <div class="trouble-card">
+        <h3>📦 File Too Big to Upload <span class="trouble-badge">Common</span></h3>
+        <p>
+          GitHub has a 25MB limit per file when uploading via browser. A Keynote exported at "Best" quality can easily exceed this.
+        </p>
+        <p><strong>Fix:</strong></p>
+        <ol style="color: var(--text-secondary);">
+          <li>Go back to Keynote and re-export as PDF</li>
+          <li>When choosing quality, select <strong>Good</strong> instead of Best</li>
+          <li>This reduces file size significantly with minimal visual difference</li>
+          <li>If still too large: reduce the number of slides per file, or remove large images from the presentation</li>
+        </ol>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <strong>⚠️ Remember</strong>
+          "Best" quality Keynote exports can be 50MB+. "Good" quality is typically under 10MB. For GitHub uploads, Good is always sufficient.
+        </div>
+      </div>
+
+      <div class="trouble-card">
+        <h3>🔑 Login Issues / Locked Out of GitHub <span class="trouble-badge">Important</span></h3>
+        <p>
+          If you forget your password or lose access to your account, GitHub uses Recovery Codes to verify your identity.
+        </p>
+        <p><strong>Prevention (do this now, before it happens):</strong></p>
+        <ol style="color: var(--text-secondary);">
+          <li>Go to GitHub Settings → Password and Authentication</li>
+          <li>Find your <strong>Recovery Codes</strong> and download or copy them</li>
+          <li>Write them in a physical notebook kept at the hub — not just on your iPad</li>
+          <li>Never store your only copy of recovery codes on the same device you use to log in</li>
+        </ol>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <strong>⚠️ iPads Get Wiped</strong>
+          If your recovery codes are only saved on your iPad and the iPad gets wiped, you may lose access to your account permanently. Write. Them. Down.
+        </div>
+      </div>
+
+      <div class="trouble-card">
+        <h3>🗂️ Can't Find the File in the Files App <span class="trouble-badge">Common</span></h3>
+        <p>
+          After exporting from Keynote, students sometimes can't find the PDF when trying to upload to GitHub.
+        </p>
+        <p><strong>Fix:</strong></p>
+        <ol style="color: var(--text-secondary);">
+          <li>Open the <strong>Files</strong> app on your iPad</li>
+          <li>Check <strong>On My iPad → Keynote</strong> — exports often save here by default</li>
+          <li>Also check <strong>Recents</strong> at the top of the Files app — it shows your most recently saved files</li>
+          <li>If you saved to iCloud, make sure iCloud Drive is turned on in Settings</li>
+        </ol>
+        <div class="img-placeholder">
+          [IMAGE: iPad Files app showing the "Recents" section with a recently exported PDF visible]
+        </div>
+      </div>
+
+      <div class="trouble-card">
+        <h3>🌐 GitHub Looks Different Than Expected <span class="trouble-badge">Minor</span></h3>
+        <p>
+          GitHub occasionally updates its interface. If the screenshots in this guide look slightly different from what you see, the functionality is still the same — only the layout may have shifted.
+        </p>
+        <p><strong>What to look for instead of exact button locations:</strong></p>
+        <ul style="color: var(--text-secondary);">
+          <li>The <strong>+ icon</strong> or <strong>Add file</strong> button to upload</li>
+          <li>The <strong>Commits</strong> link near the file list to see history</li>
+          <li>The <strong>Issues</strong> tab at the top of any repository</li>
+          <li>The <strong>Edit (pencil) icon</strong> to edit the README</li>
+        </ul>
+      </div>
+
+      <div class="trouble-card">
+        <h3>📵 No Internet at the Hub <span class="trouble-badge">Situational</span></h3>
+        <p>
+          GitHub requires an internet connection. If the hub's connection is down, you can still do the work — just save it for later.
+        </p>
+        <p><strong>Offline workflow:</strong></p>
+        <ol style="color: var(--text-secondary);">
+          <li>Continue working in Keynote — you don't need internet for that</li>
+          <li>Export your PDF and save it to the Files app as normal</li>
+          <li>When the connection is restored, upload everything you saved</li>
+          <li>Use a descriptive commit message that mentions the actual date of the work</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Quick Reference Card ───────────────────────────── -->
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <p class="section-label">Quick Reference</p>
+      <h2 class="section-title">The Workflow at a Glance</h2>
+
+      <div class="card" style="border-left: 4px solid var(--accent);">
+        <h4 style="margin-bottom: 16px;">Student Weekly Workflow</h4>
+        <ol style="color: var(--text-secondary); line-height: 2;">
+          <li>Work in <strong>Keynote</strong> on iPad</li>
+          <li>Tap ··· → <strong>Export → PDF → Good quality</strong></li>
+          <li>Tap <strong>Save to Files</strong> with a clear filename</li>
+          <li>Open <strong>Safari</strong> → go to your GitHub repo</li>
+          <li>Tap <strong>Add file → Upload files</strong></li>
+          <li>Select your PDF from Files</li>
+          <li>Write a <strong>commit message</strong> describing what it is</li>
+          <li>Tap <strong>Commit changes</strong> ✅</li>
+        </ol>
+      </div>
+
+      <div class="card" style="border-left: 4px solid var(--accent); margin-top: 16px;">
+        <h4 style="margin-bottom: 16px;">Facilitator Friday Workflow</h4>
+        <ol style="color: var(--text-secondary); line-height: 2;">
+          <li>Write weekly report in Keynote or Pages</li>
+          <li>Export as <strong>PDF → Good quality</strong></li>
+          <li>Name it: <code>Week-[N]-[HubName]-Report.pdf</code></li>
+          <li>Upload to <code>reports/</code> folder in hub repository</li>
+          <li>Write a <strong>commit message</strong> with student count and highlights</li>
+          <li>Tap <strong>Commit changes</strong></li>
+          <li>Send sponsor the <strong>repo URL</strong> — not an attachment ✅</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">🗄️ The <span>Hub Vault</span></div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+        <p class="footer-copy">
+          A resource for Zimbabwe Innovation Hubs × Matter Career Readiness Institute (MCRI). Built for GitHub Pages.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

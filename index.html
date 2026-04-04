@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hub Vault — Home</title>
+  <meta name="description" content="The Hub Vault bridges Zimbabwe's innovation hubs with the Matter Career Readiness Institute. Learn to use GitHub as your professional digital vault." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Prevent theme flash -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('hub-vault-theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        🗄️ The <span>Hub Vault</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-right">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">🌙</button>
+        <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+      <a href="index.html">🏠 Home</a>
+      <a href="student-zone.html">🎓 Students</a>
+      <a href="facilitator-portal.html">🏢 Facilitators</a>
+      <a href="cheat-sheet.html">📋 Cheat Sheet</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">Zimbabwe Innovation Hubs × MCRI</span>
+      <h1>Your Work. Tracked.<br/>Professional. Safe.</h1>
+      <p class="hero-sub">
+        The Hub Vault teaches you to use GitHub as your professional digital filing system — for presentations, reports, and portfolios that never get lost.
+      </p>
+      <div class="hero-actions">
+        <a href="student-zone.html" class="btn btn-primary">I'm a Student →</a>
+        <a href="facilitator-portal.html" class="btn btn-secondary">I'm a Facilitator →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── The Foundation ─────────────────────────────────── -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">The Foundation</p>
+      <h2 class="section-title">What is GitHub?</h2>
+      <p class="section-subtitle">
+        Forget the technical jargon. Here is what GitHub actually does for you.
+      </p>
+
+      <div class="card-grid">
+
+        <div class="card">
+          <span class="card-icon">📁</span>
+          <h3>The Folder</h3>
+          <p>
+            GitHub is a cloud-based home for your project files. Think of it as Google Drive, but built specifically for creators who want to show their work professionally.
+          </p>
+          <p>
+            Every file you upload lives there permanently — accessible from any device, anywhere in Zimbabwe.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">⏳</span>
+          <h3>The Time Machine</h3>
+          <p>
+            GitHub remembers <strong>every version</strong> of your work. If you accidentally delete a slide on your iPad today, GitHub has the version from last week. Nothing is ever truly lost.
+          </p>
+          <p>
+            This is called <strong>version history</strong> — and it is one of the most powerful tools a professional can have.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🛂</span>
+          <h3>The Digital Passport</h3>
+          <p>
+            Your GitHub profile is how the <strong>Matter Career Readiness Institute (MCRI)</strong> and hiring companies see who you are <em>before</em> they ever meet you.
+          </p>
+          <p>
+            A filled GitHub profile with real projects says: <em>"I am serious. I do the work. Here is the proof."</em>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How We Use It ──────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">How We Use It</p>
+      <h2 class="section-title">Three Reasons GitHub Matters Here</h2>
+      <p class="section-subtitle">
+        At every innovation hub across Zimbabwe, we use GitHub for the same three things.
+      </p>
+
+      <div class="card-grid">
+
+        <div class="card">
+          <span class="card-icon">📄</span>
+          <h3>Reports</h3>
+          <p>
+            Facilitators keep sponsors updated with weekly PDF reports — uploaded directly to the hub's GitHub repository. One link. All the evidence. No email attachments.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">🏆</span>
+          <h3>Portfolios</h3>
+          <p>
+            Students build a track record of commits that proves they are ready for the Institute. Your GitHub is your portfolio — and it speaks for itself.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="card-icon">👀</span>
+          <h3>Transparency</h3>
+          <p>
+            Sponsors, hire-ups, and the MCRI can watch the birth of a developer ecosystem in real-time — no login required. The work is public. The growth is visible.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Big Idea Quote ──────────────────────────────────── -->
+  <section class="section section-alt">
+    <div class="container" style="text-align: center; max-width: 720px;">
+      <p class="section-label">The Big Idea</p>
+      <h2 style="font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 1rem;">
+        "Your work is too valuable to lose.<br/>
+        Stop emailing. Start committing."
+      </h2>
+      <p>
+        iPads get wiped at the end of every cohort. Emails get buried. Hard drives fail. GitHub does not. The hub that builds on GitHub builds a legacy — not just a workshop.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── CTA Cards ───────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Where to Start</p>
+      <h2 class="section-title">Pick Your Path</h2>
+      <div class="card-grid-2">
+
+        <div class="card" style="border-top: 3px solid var(--accent);">
+          <span class="card-icon">🎓</span>
+          <h3>I'm a Student</h3>
+          <p>
+            Learn to set up your GitHub account, create your first repository, export your Keynote as a PDF, and upload it — step by step.
+          </p>
+          <a href="student-zone.html" class="btn btn-primary" style="margin-top: 16px;">Go to Student Zone →</a>
+        </div>
+
+        <div class="card" style="border-top: 3px solid var(--accent);">
+          <span class="card-icon">🏢</span>
+          <h3>I'm a Facilitator</h3>
+          <p>
+            Learn how to set up your hub's repository, run the weekly reporting cycle, and monitor student submissions using the Commits tab.
+          </p>
+          <a href="facilitator-portal.html" class="btn btn-primary" style="margin-top: 16px;">Go to Facilitator Portal →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">🗄️ The <span>Hub Vault</span></div>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="student-zone.html">Students</a></li>
+          <li><a href="facilitator-portal.html">Facilitators</a></li>
+          <li><a href="cheat-sheet.html">Cheat Sheet</a></li>
+        </ul>
+        <p class="footer-copy">
+          A resource for Zimbabwe Innovation Hubs × Matter Career Readiness Institute (MCRI). Built for GitHub Pages.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
