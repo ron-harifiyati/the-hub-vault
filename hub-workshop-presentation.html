@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCRI × Hub Facilitator Workshop — GitHub 101</title>
+  <script>
+    (function(){
+      var t = localStorage.getItem('hub-vault-theme') ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <style>
+    /* ── Variables ─────────────────────────────────────────── */
+    :root {
+      --bg: #ffffff;
+      --bg2: #f5f5f5;
+      --bg3: #ebebeb;
+      --card: #ffffff;
+      --text: #111111;
+      --text2: #444444;
+      --text3: #777777;
+      --accent: #e85a1a;
+      --accent-h: #ff6b2b;
+      --accent-bg: rgba(232, 90, 26, 0.1);
+      --border: #e0e0e0;
+      --shadow: rgba(0,0,0,0.07);
+      --green: #16a34a;
+      --green-bg: rgba(22,163,74,0.1);
+      --amber: #d97706;
+      --amber-bg: rgba(217,119,6,0.1);
+      --blue: #2563eb;
+      --blue-bg: rgba(37,99,235,0.1);
+    }
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --bg2: #1a1a1a;
+      --bg3: #252525;
+      --card: #1e1e1e;
+      --text: #f0f0f0;
+      --text2: #b0b0b0;
+      --text3: #666666;
+      --accent: #ff6b2b;
+      --accent-h: #ff8c55;
+      --accent-bg: rgba(255,107,43,0.12);
+      --border: #333333;
+      --shadow: rgba(0,0,0,0.35);
+      --green: #22c55e;
+      --green-bg: rgba(34,197,94,0.1);
+      --amber: #fbbf24;
+      --amber-bg: rgba(251,191,36,0.1);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96,165,250,0.1);
+    }
+
+    /* ── Reset ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { height: 100%; }
+    body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg2);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+      transition: background .2s, color .2s;
+    }
+
+    /* ── Presentation Card ──────────────────────────────────── */
+    #presentation-card {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 940px;
+      height: min(700px, calc(100vh - 40px));
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 48px var(--shadow);
+      overflow: hidden;
+      transition: height .3s ease;
+    }
+    #presentation-card.tall {
+      height: calc(100vh - 40px);
+    }
+    ul, ol { padding-left: 1.4em; }
+    li { margin-bottom: .45em; color: var(--text2); line-height: 1.6; font-size: 1rem; }
+    strong { color: var(--text); font-weight: 700; }
+    code {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: .85em;
+      background: var(--bg3);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Header ────────────────────────────────────────────── */
+    #header {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+      gap: 12px;
+      border-radius: 16px 16px 0 0;
+    }
+    .h-logo {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .h-logo span { color: var(--accent); }
+    .h-phase {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: var(--accent-bg);
+      color: var(--accent);
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+      transition: opacity .3s;
+    }
+    .h-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .icon-btn {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text2);
+      transition: background .15s, border-color .15s;
+      flex-shrink: 0;
+    }
+    .icon-btn:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+    .icon-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+
+    /* ── Progress Bar ──────────────────────────────────────── */
+    #progress-bar {
+      flex-shrink: 0;
+      height: 3px;
+      background: var(--border);
+    }
+    #progress-fill {
+      height: 100%;
+      background: var(--accent);
+      transition: width .3s ease;
+    }
+
+    /* ── Slide Stage ───────────────────────────────────────── */
+    #stage {
+      flex: 1;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* ── Slides ────────────────────────────────────────────── */
+    .slide {
+      display: none;
+      padding: 32px 28px 20px;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      animation: fadeIn .25s ease;
+    }
+    .slide.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    /* Cover slide */
+    .slide-cover {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100%;
+      padding: 40px 24px;
+    }
+    .slide-cover.active { display: flex; }
+    .cover-eyebrow {
+      display: inline-block;
+      background: var(--accent-bg);
+      color: var(--accent);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .cover-title {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .cover-title span { color: var(--accent); }
+    .cover-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text2);
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+    .cover-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .meta-pill {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: .9rem;
+      color: var(--text2);
+    }
+    .meta-pill strong { color: var(--accent); display: block; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 2px; }
+
+    /* Break / Lunch slide */
+    .slide-break {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100%;
+      padding: 40px 24px;
+    }
+    .slide-break.active { display: flex; }
+    .break-icon { font-size: 5rem; margin-bottom: 16px; }
+    .break-title { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; margin-bottom: 8px; }
+    .break-time { font-size: 1.1rem; color: var(--text2); margin-bottom: 24px; }
+    .break-note {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: .95rem;
+      color: var(--text2);
+      max-width: 480px;
+    }
+
+    /* Slide header */
+    .slide-phase {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .slide-title {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .slide-subtitle {
+      font-size: 1.05rem;
+      color: var(--text2);
+      margin-bottom: 24px;
+      max-width: 640px;
+    }
+
+    /* Card grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+    .card-icon { font-size: 2.6rem; margin-bottom: 12px; display: block; }
+    .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+    .card p { font-size: 1rem; color: var(--text2); margin: 0; line-height: 1.5; }
+    .card.accent { border-color: var(--accent); border-top: 3px solid var(--accent); }
+    .card.green { border-top: 3px solid var(--green); }
+    .card.amber { border-top: 3px solid var(--amber); }
+    .card.blue { border-top: 3px solid var(--blue); }
+
+    /* Callout */
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-bg);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      font-size: .95rem;
+    }
+    .callout strong { color: var(--accent); display: block; margin-bottom: 4px; }
+    .callout.warning { border-left-color: var(--amber); background: var(--amber-bg); }
+    .callout.warning strong { color: var(--amber); }
+    .callout.success { border-left-color: var(--green); background: var(--green-bg); }
+    .callout.success strong { color: var(--green); }
+    .callout.info { border-left-color: var(--blue); background: var(--blue-bg); }
+    .callout.info strong { color: var(--blue); }
+
+    /* Step badge (used inside cards on step slides) */
+    .step-badge {
+      width: 44px; height: 44px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.3rem;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    /* TOC */
+    .toc-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .toc-item:hover { border-color: var(--accent); background: var(--accent-bg); }
+    .toc-time {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-bg);
+      padding: 3px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+    .toc-item h4 { font-size: .95rem; margin: 0; }
+    .toc-item p { font-size: .8rem; color: var(--text3); margin: 0; }
+    .toc-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .toc-dot.orange { background: var(--accent); }
+    .toc-dot.green { background: var(--green); }
+    .toc-dot.blue { background: var(--blue); }
+    .toc-dot.amber { background: var(--amber); }
+    .toc-dot.gray { background: var(--text3); }
+
+    /* Comparison */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .compare-col { border-radius: 10px; padding: 20px; }
+    .compare-col.bad { background: rgba(239,68,68,.09); border: 1px solid rgba(239,68,68,.25); }
+    .compare-col.good { background: var(--green-bg); border: 1px solid rgba(22,163,74,.25); }
+    .compare-col h4 { margin-bottom: 10px; font-size: .9rem; }
+    .compare-col.bad h4 { color: #ef4444; }
+    .compare-col.good h4 { color: var(--green); }
+
+    /* Table */
+    .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    thead { background: var(--accent); color: #fff; }
+    thead th { padding: 11px 14px; text-align: left; font-weight: 700; }
+    tbody td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid var(--border); }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--bg2); }
+
+    /* Notes panel */
+    #notes-panel {
+      flex-shrink: 0;
+      background: var(--bg2);
+      border-top: 2px solid var(--accent);
+      padding: 14px 24px;
+      display: none;
+      max-height: 160px;
+      overflow-y: auto;
+    }
+    #notes-panel.visible { display: block; }
+    #notes-panel strong { color: var(--accent); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 6px; }
+    #notes-panel p, #notes-panel ul, #notes-panel li {
+      font-size: .9rem;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+
+    /* Footer Nav */
+    #footer {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 60px;
+      border-top: 1px solid var(--border);
+      background: var(--card);
+      gap: 12px;
+      border-radius: 0 0 16px 16px;
+    }
+    .nav-btn {
+      display: flex; align-items: center; gap: 6px;
+      min-width: 100px; height: 44px;
+      padding: 0 18px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text2);
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover:not(:disabled) { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+    .nav-btn:disabled { opacity: .3; cursor: not-allowed; }
+    .nav-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .nav-btn.primary:hover:not(:disabled) { background: var(--accent-h); border-color: var(--accent-h); color: #fff; }
+    .slide-counter {
+      font-size: .85rem;
+      color: var(--text3);
+      text-align: center;
+      flex: 1;
+    }
+    .slide-counter strong { color: var(--text); }
+
+    /* Keyboard hint */
+    .kbd {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: .75rem;
+      font-family: monospace;
+      color: var(--text3);
+    }
+
+    /* Scrollbar */
+    #stage::-webkit-scrollbar { width: 5px; }
+    #stage::-webkit-scrollbar-track { background: transparent; }
+    #stage::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .slide { padding: 24px 16px 16px; }
+      .cards { grid-template-columns: 1fr; }
+      .cards-2 { grid-template-columns: 1fr; }
+      .compare { grid-template-columns: 1fr; }
+      .nav-btn { min-width: 80px; padding: 0 12px; font-size: .85rem; }
+      #header { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Presentation Card ──────────────────────────────────── -->
+<div id="presentation-card">
+
+<!-- ── Header ─────────────────────────────────────────────── -->
+<div id="header">
+  <div class="h-logo">🗄️ The <span>Hub Vault</span></div>
+  <div class="h-phase" id="phase-label">Workshop</div>
+  <div class="h-controls">
+    <button class="icon-btn" id="notes-toggle" title="Toggle facilitator notes (N)">📝</button>
+    <button class="icon-btn" id="theme-btn" title="Toggle light/dark mode">🌙</button>
+  </div>
+</div>
+
+<!-- ── Progress Bar ───────────────────────────────────────── -->
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- ── Slide Stage ────────────────────────────────────────── -->
+<div id="stage">
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 1 — COVER
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide slide-cover" data-phase="Workshop" data-notes="Welcome everyone. Give people 5 minutes to settle and get their iPads out. Start on time — a workshop that starts late sets the wrong tone.">
+    <div class="cover-eyebrow">MCRI × Zimbabwe Innovation Hubs</div>
+    <h1 class="cover-title">GitHub <span>101</span></h1>
+    <p class="cover-sub">Empowering Facilitators to Build a Digital Vault for Student Portfolios and Hub Reports</p>
+    <div class="cover-meta">
+      <div class="meta-pill"><strong>Date</strong>Today's Session</div>
+      <div class="meta-pill"><strong>Duration</strong>10:00 – 15:00</div>
+      <div class="meta-pill"><strong>Platform</strong>iPadOS + Safari</div>
+      <div class="meta-pill"><strong>Goal</strong>Everyone uploads by end of day</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 2 — TABLE OF CONTENTS
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Agenda" data-notes="Walk through the agenda quickly. Ask if anyone has a hard stop before 15:00. Confirm Wi-Fi is working NOW — not at the moment someone needs to upload.">
+    <p class="slide-phase">Today's Plan</p>
+    <h2 class="slide-title">What We're Covering</h2>
+    <ul class="toc-list">
+      <li class="toc-item" onclick="goToSlide(2)">
+        <div class="toc-dot orange"></div>
+        <span class="toc-time">10:00–10:45</span>
+        <div><h4>Phase 1: The "Why" &amp; The Digital Vault</h4><p>What GitHub is, the iPad wipe problem, the Receipts demo</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(6)">
+        <div class="toc-dot orange"></div>
+        <span class="toc-time">10:45–11:30</span>
+        <div><h4>Phase 2: The iPad-to-GitHub Pipeline</h4><p>Live demo + everyone uploads their first PDF</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(13)">
+        <div class="toc-dot gray"></div>
+        <span class="toc-time">11:30–11:45</span>
+        <div><h4>☕ Break</h4><p>15 minutes</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(14)">
+        <div class="toc-dot blue"></div>
+        <span class="toc-time">11:45–13:00</span>
+        <div><h4>Phase 3: Ownership — Creating Hub Repos</h4><p>Everyone builds their own hub repository</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(17)">
+        <div class="toc-dot gray"></div>
+        <span class="toc-time">13:00–14:00</span>
+        <div><h4>🍽️ Lunch</h4><p>1 hour</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(18)">
+        <div class="toc-dot green"></div>
+        <span class="toc-time">14:00–14:45</span>
+        <div><h4>Phase 4: Training the Trainers</h4><p>Scenario practice, student handover, weekly routines</p></div>
+      </li>
+      <li class="toc-item" onclick="goToSlide(20)">
+        <div class="toc-dot amber"></div>
+        <span class="toc-time">14:45–15:00</span>
+        <div><h4>Closing &amp; The Golden Link</h4><p>Bookmarks, call to action, send-off</p></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 3 — PHASE 1: THE PROBLEM
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 1 — The Why" data-notes="This is your hook. Ask the room: 'Has anyone had a student lose their work?' Let them answer. The pain is real — make them feel it before you offer the solution. Don't rush past this slide.">
+    <p class="slide-phase">Phase 1 — 10:00 to 10:45</p>
+    <h2 class="slide-title">The Problem We're Solving</h2>
+    <div class="callout warning">
+      <strong>⚠️ The iPad Wipe Problem</strong>
+      At the end of every cohort, hub iPads are reset. Every presentation, every project, every piece of student work — gone. Unless it's somewhere else.
+    </div>
+    <div class="compare">
+      <div class="compare-col bad">
+        <h4>❌ Without GitHub</h4>
+        <ul>
+          <li>iPad gets wiped — everything gone</li>
+          <li>No proof. No portfolio. No record.</li>
+          <li>Sponsors can't see what their money funded</li>
+        </ul>
+      </div>
+      <div class="compare-col good">
+        <h4>✅ With GitHub</h4>
+        <ul>
+          <li>iPad wipe? Doesn't matter</li>
+          <li>Every upload is timestamped — permanent proof</li>
+          <li>Sponsors see everything, from anywhere, no login</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>The Blunt Truth</strong>
+      If it's not on GitHub, it didn't happen. That's the rule. That's what we're here to fix today.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 4 — WHAT IS GITHUB
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 1 — The Why" data-notes="Don't say 'version control' or 'Git repository'. Use only these three analogies. Point to each card as you explain. Ask: 'Which of these three would help your students most?' Get answers.">
+    <p class="slide-phase">Phase 1 — What is GitHub?</p>
+    <h2 class="slide-title">Three Things GitHub Does For Us</h2>
+    <p class="slide-subtitle">Forget the technical definition. Here is what it actually means for your hub.</p>
+    <div class="cards">
+      <div class="card accent">
+        <span class="card-icon">📁</span>
+        <h3>The Folder</h3>
+        <p>Cloud storage for every project file — accessible from any device, forever.</p>
+      </div>
+      <div class="card accent">
+        <span class="card-icon">⏳</span>
+        <h3>The Time Machine</h3>
+        <p>Delete a slide Monday — GitHub has it from Sunday. Nothing is ever truly lost.</p>
+      </div>
+      <div class="card accent">
+        <span class="card-icon">🛂</span>
+        <h3>The Digital Passport</h3>
+        <p><em>"I showed up. I did the work. Here is the proof."</em></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 5 — THE TOUR + THE RECEIPTS
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 1 — The Why" data-notes="Open the demo repository on the big screen NOW. Narrate as you scroll. Then click the Commits count — show the timestamp list. Say: 'This student uploaded at 2:47 PM on a Tuesday. That is a receipt. That is what we are building today.'">
+    <p class="slide-phase">Phase 1 — The Live Demo</p>
+    <h2 class="slide-title">What a Real Repository Looks Like</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">📂</span>
+        <h3>The File List</h3>
+        <p>Every uploaded PDF in one place. No email. No WhatsApp. Just a link.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📖</span>
+        <h3>The README</h3>
+        <p>The front cover. Tells visitors what this hub is and what they'll find here.</p>
+      </div>
+      <div class="card green">
+        <span class="card-icon">🕐</span>
+        <h3>The Commits Tab</h3>
+        <p>Every upload is timestamped. Who uploaded, what file, exact date and time. These are the receipts.</p>
+      </div>
+    </div>
+    <div class="callout warning">
+      <strong>⚠️ The Rule</strong>
+      "I did the work" is a claim. A commit dated Tuesday at 2:47 PM is evidence. Teach this difference from day one.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 7 — ACCOUNT CHECK
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 1 — The Why" data-notes="Walk the room. Do NOT stand at the front. Move between tables. The 40-minute mark is the deadline for this — if someone is stuck, pair them with a buddy immediately and move on. Don't let one blocked person stall the entire room.">
+    <p class="slide-phase">Phase 1 — Account Check</p>
+    <h2 class="slide-title">Everyone In Before We Move On</h2>
+    <div class="callout warning">
+      <strong>⚠️ Do This Now — Deadline: 10:40 AM</strong>
+      Everyone must be logged into GitHub on their iPad before Phase 2 starts. A person who can't log in during the pipeline demo falls 30 minutes behind instantly.
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">✅</span>
+        <h3>Already Logged In</h3>
+        <p>Open Safari → <code>github.com</code> → profile picture in top right. You're ready.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔑</span>
+        <h3>Forgot Password</h3>
+        <p>Tap "Forgot password" → check email. Can't access email? Pair with a buddy now.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🆕</span>
+        <h3>No Account Yet</h3>
+        <p><code>github.com</code> → "Sign up." Username must be professional: <code>TendaiMoyo</code> not <code>coolkid99</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 8 — PHASE 2: PIPELINE OVERVIEW
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="Mirror your iPad to the big screen NOW. Say: 'Watch me do this end-to-end first, then you will do it.' Do the full demo at a slow, visible pace. THEN let them follow along.">
+    <p class="slide-phase">Phase 2 — 10:45 to 11:30</p>
+    <h2 class="slide-title">The iPad-to-GitHub Pipeline</h2>
+    <p class="slide-subtitle">Four steps. This is the workflow your students will repeat every week.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Keynote — Create</h3>
+        <p>One slide: "Hello from [Your Hub]." Any theme, any size.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Export — PDF</h3>
+        <p>Tap ··· → Export → PDF → <strong>Good</strong> quality. PDFs open everywhere — Keynote files don't.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Save — Files App</h3>
+        <p>Save to Files with a clear name: <code>Hello-HarareHub-YourName.pdf</code></p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Upload — GitHub</h3>
+        <p>Safari → repo → Add file → Upload → select PDF → commit message → Commit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 9 — STEP 1: KEYNOTE
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="Keep this fast — everyone already knows Keynote. The point is that we're creating something real to upload. If anyone doesn't have Keynote, they can use Pages or even write a title on a plain slide. The app doesn't matter — the PDF does.">
+    <p class="slide-phase">Phase 2 — Step 1</p>
+    <h2 class="slide-title">Keynote: Create Your Slide</h2>
+    <div class="callout info">
+      <strong>🖥️ Mirror Your iPad Now</strong>
+      Everyone watches you first. Then they copy. Don't let them race ahead.
+    </div>
+    <div class="cards cards-2">
+      <div class="card">
+        <h4>What to Create</h4>
+        <ul style="margin-top:8px;">
+          <li>Open Keynote on your iPad</li>
+          <li>Create a new presentation — any theme</li>
+          <li>Title slide only: <em>"Hello from [Your Hub Name]"</em></li>
+          <li>Add your name as subtitle</li>
+          <li>That's it — one slide is enough for this demo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Why Not Just Upload the Keynote?</h4>
+        <p style="margin-bottom:10px;">A <code>.key</code> file only opens in Apple Keynote. A PDF opens in:</p>
+        <ul>
+          <li>Any web browser</li>
+          <li>Any phone or tablet</li>
+          <li>A sponsor's Windows laptop</li>
+          <li>GitHub's built-in viewer — no download needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 10 — STEP 2: EXPORT PDF
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="This is the step most people get wrong — they pick 'Best' quality and their file is 50MB and won't upload. Say this clearly: 'Good quality. Not Best. Good.' Point at the slide.">
+    <p class="slide-phase">Phase 2 — Step 2</p>
+    <h2 class="slide-title">Export as PDF from Keynote</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Tap the three dots (···)</h3>
+        <p>Top-right corner of Keynote — the overflow menu.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Tap "Export" → PDF</h3>
+        <p>Select PDF from the format options.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Choose Quality: GOOD</h3>
+        <p>Best = 50MB+. Good = under 5MB. GitHub limit is 25MB. <strong>Always choose Good.</strong></p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Tap Export to confirm</h3>
+        <p>PDF is generated. A share sheet appears next.</p>
+      </div>
+    </div>
+    <div class="callout warning">
+      <strong>⚠️ Say this out loud</strong>
+      "Good. Not Best. Good. Best = file too large to upload."
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 11 — STEP 3: SAVE TO FILES
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="The most common issue here: people tap 'Save to Files' and don't know where it saved. Tell them: On My iPad → Keynote is where it usually goes. OR use the Recents section. Name the file properly — this matters for finding it in the next step.">
+    <p class="slide-phase">Phase 2 — Step 3</p>
+    <h2 class="slide-title">Save to the Files App</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Tap "Save to Files"</h3>
+        <p>From the share sheet after export. Look for the Files icon.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Choose save location</h3>
+        <p><strong>On My iPad</strong> or <strong>iCloud Drive</strong>. Either works — remember which.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Rename the file</h3>
+        <p><code>Hello-HarareHub-TendaiMoyo.pdf</code> — Hub + Name. No spaces.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Tap Save — then verify</h3>
+        <p>Open Files app and confirm your PDF is there before switching to Safari.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>💡 Quick Check</strong>
+      Don't move to Step 4 until you can see your PDF in the Files app.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 12 — STEP 4: UPLOAD TO GITHUB
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="Write the collaboration repo URL on a whiteboard or post it in your group chat NOW so everyone can navigate to it. Don't make them type it from memory.">
+    <p class="slide-phase">Phase 2 — Step 4</p>
+    <h2 class="slide-title">Upload to GitHub in Safari</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Open Safari → Collaboration Repo</h3>
+        <p>Use the URL on screen or in the group chat. Confirm you're logged in.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Tap "Add file" → "Upload files"</h3>
+        <p>Near the top of the file list. Don't see it? You're not logged in.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Find your PDF</h3>
+        <p>On My iPad → Keynote → select file. Or use Recents at the top of the picker.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Write commit message → Commit</h3>
+        <p><em>"Hello from [Hub Name] — [Your Name]"</em> → tap the green Commit button.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 13 — THE ACTIVITY
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="Give everyone 10 minutes to do this on their own. Walk the room. Don't do it for them — guide with questions: 'Where are you stuck?' Don't touch anyone's iPad unless absolutely necessary.">
+    <p class="slide-phase">Phase 2 — Group Activity</p>
+    <h2 class="slide-title">Now It's Your Turn</h2>
+    <p class="slide-subtitle">Every facilitator creates a "Hello" PDF and uploads it to the shared Collaboration Repository.</p>
+    <div class="callout">
+      <strong>📋 Your Task</strong>
+      Follow the 4-step pipeline to upload your Hello PDF to the shared repo. Your file name must include your hub name and your name: <code>Hello-[HubName]-[YourName].pdf</code>
+    </div>
+    <div class="cards">
+      <div class="card green">
+        <h4>✅ When You're Done</h4>
+        <ul style="margin-top:8px;">
+          <li>You can see your file in the repo file list</li>
+          <li>The Commits count has gone up by 1</li>
+          <li>Your commit message is visible in the history</li>
+        </ul>
+      </div>
+      <div class="card amber">
+        <h4>⚠️ If You're Stuck</h4>
+        <ul style="margin-top:8px;">
+          <li>Check you're logged into GitHub in Safari</li>
+          <li>Check the file exists in your Files app</li>
+          <li>Refresh the page and try again</li>
+          <li>Raise your hand — a buddy or facilitator will help</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 14 — THE MAGIC MOMENT
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="This is the most important moment of the workshop. Wait until most people have uploaded — aim for 80%+ before doing the refresh. The gasp when 20+ files appear is the moment they go from 'I understand it' to 'I BELIEVE it'. Don't rush it.">
+    <p class="slide-phase">Phase 2 — The Magic Moment</p>
+    <h2 class="slide-title">Watch What Happens When We Refresh</h2>
+    <div class="callout success">
+      <strong>✨ Do This Now on the Big Screen</strong>
+      Refresh the Collaboration Repository. Watch every facilitator's "Hello" PDF appear — all at once. This is a live, shared space. It's working in real time.
+    </div>
+    <div class="cards cards-2">
+      <div class="card">
+        <span class="card-icon">🎯</span>
+        <h3>What Just Happened</h3>
+        <p>20+ files. 20+ people. One link. No email, no WhatsApp, no "can you send it again."</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">💬</span>
+        <h3>The Point</h3>
+        <p>Every PDF is someone who showed up. The repository is proof of a community.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 15 — BREAK
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide slide-break" data-phase="Break" data-notes="Use the break to walk around and check: who struggled most? Who finished fastest? Make a mental note — the fast ones become peer helpers in Phase 3.">
+    <div class="break-icon">☕</div>
+    <h2 class="break-title">Break Time</h2>
+    <p class="break-time">11:30 – 11:45 | Back in 15 minutes</p>
+    <div class="break-note">Facilitators: use this time to check that everyone who struggled has a buddy lined up for Phase 3. The transition from following along to working independently is where people get lost.</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 16 — PHASE 3: CREATE HUB REPO
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 3 — Ownership" data-notes="Phase 3 is about independence. They're no longer uploading to YOUR repo — they're building their own. The goal: every facilitator leaves today with a live hub repository.">
+    <p class="slide-phase">Phase 3 — 11:45 to 13:00</p>
+    <h2 class="slide-title">Create Your Own Hub Repository</h2>
+    <p class="slide-subtitle">This is the repository that will represent your hub for the entire 2026 cohort.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Hub</th><th>Repository Name</th></tr></thead>
+        <tbody>
+          <tr><td>Mosi-oa-Tunya</td><td><code>MosiHub-Cohort-2026</code></td></tr>
+          <tr><td>Harare</td><td><code>HarareHub-Cohort-2026</code></td></tr>
+          <tr><td>Bulawayo</td><td><code>BulawayoHub-Cohort-2026</code></td></tr>
+          <tr><td>Mutare</td><td><code>MutareHub-Cohort-2026</code></td></tr>
+          <tr><td>Gweru</td><td><code>GweruHub-Cohort-2026</code></td></tr>
+          <tr><td>Other</td><td><code>[HubName]Hub-Cohort-2026</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <strong>Settings to Use</strong>
+      Visibility: <strong>Public</strong> (sponsors need to see it without a login). Tick "Add a README file." Everything else: default.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 17 — MOCK REPORT TASK
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 3 — Ownership" data-notes="Give 20–25 minutes for this. Some people will finish quickly — send them to help others. The 'mock report' content doesn't matter: it's the upload workflow they're practicing.">
+    <p class="slide-phase">Phase 3 — Task</p>
+    <h2 class="slide-title">Upload a Mock Weekly Report</h2>
+    <p class="slide-subtitle">Practice the full workflow using your own hub repository.</p>
+    <div class="cards cards-2">
+      <div class="card">
+        <h4>📋 The Task</h4>
+        <ul style="margin-top:8px;">
+          <li>Open Keynote → create a 2-slide "mock" weekly report</li>
+          <li>Slide 1: Hub name + Week number + Date</li>
+          <li>Slide 2: "X students attended. Topic: [anything]"</li>
+          <li>Export as PDF → Good quality</li>
+          <li>Save to Files: <code>Week-01-[HubName]-Report.pdf</code></li>
+          <li>Upload to <strong>your own hub repo</strong></li>
+          <li>Commit message: <em>"Week 1 mock report — [Hub Name]"</em></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>✅ Done When...</h4>
+        <ul style="margin-top:8px;">
+          <li>Your hub repository has at least 1 commit</li>
+          <li>The PDF is visible in the file list</li>
+          <li>The commit message is descriptive</li>
+          <li>You can copy the repo URL and share it</li>
+        </ul>
+        <div class="callout success" style="margin-top: 12px;">
+          <strong>🏆 Bonus</strong>
+          Create a <code>reports/</code> folder by typing <code>reports/</code> before the filename when uploading.
+        </div>
+      </div>
+    </div>
+    <div class="callout info" style="margin-top: 4px;">
+      <strong>📋 Checkpoint — Before Moving On</strong>
+      Post your repository URL in the group chat now. We'll spot-check 3 on the big screen together.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 18 — FILE MANAGEMENT
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 3 — Ownership" data-notes="Keep this short — 10 minutes max. The key message: we almost never delete. GitHub's power is that nothing is lost. Renaming and editing are for polish, not for regular workflow.">
+    <p class="slide-phase">Phase 3 — File Management</p>
+    <h2 class="slide-title">Editing, Renaming &amp; Deleting Files</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="card-icon">✏️</span>
+        <h3>Editing a File</h3>
+        <p>Click file → pencil icon. For PDFs: just upload a new version instead.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🗑️</span>
+        <h3>Deleting a File</h3>
+        <p>Removed from view — but stays in commit history forever. Nothing is truly erased.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔒</span>
+        <h3>Public vs. Private</h3>
+        <p><strong>Hub repos = Public.</strong> Sponsors must see the work without needing a GitHub login.</p>
+      </div>
+    </div>
+    <div class="callout warning">
+      <strong>⚠️ Our Rule</strong>
+      Hub repositories should always be <strong>Public</strong>. Sponsors should never need a GitHub account to see the work we are doing.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 19 — LUNCH
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide slide-break" data-phase="Lunch" data-notes="During lunch: identify the 2–3 most confident facilitators. Ask them if they'd be willing to be 'Floor Helpers' for Phase 4 — walking the room while you present. This multiplies your reach significantly.">
+    <div class="break-icon">🍽️</div>
+    <h2 class="break-title">Lunch Break</h2>
+    <p class="break-time">13:00 – 14:00 | Back in one hour</p>
+    <div class="break-note">If you haven't finished Phase 3, use this time to complete your hub repository. Phase 4 assumes your repo is live — you need it to follow along.</div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 21 — PHASE 4: SCENARIO TRAINING
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 4 — Training" data-notes="Run this as a discussion — pose the scenario, wait for answers, then show the solution. Don't rush to the answer. The facilitators who talk through the problem out loud are the ones who remember the solution. Give them 3 minutes to discuss in pairs.">
+    <p class="slide-phase">Phase 4 — 14:00 to 14:45</p>
+    <h2 class="slide-title">Scenario: What Would You Do?</h2>
+    <div class="callout amber">
+      <strong>🎭 Scenario</strong>
+      A student tells you: <em>"I finished my Blue's Adventure presentation but the iPad was wiped at the end of last cohort and my Keynote file is gone."</em>
+    </div>
+    <div class="cards cards-2">
+      <div class="card">
+        <h4>Without GitHub</h4>
+        <p>Nothing you can do. The work is gone. No proof, no portfolio, no record.</p>
+      </div>
+      <div class="card green">
+        <h4>With GitHub</h4>
+        <p>Check the repo. Committed? It's there — timestamped, permanent. Not committed? That's the lesson they never forget.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>💬 The Question to Ask Students</strong>
+      "Did you upload it to GitHub?" That's it. Two outcomes: yes (they're safe) or no (they learn the rule the hard way, once).
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 22 — THE HANDOVER + WEEKLY ROUTINE
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Phase 4 — Training" data-notes="Open the Hub Vault → Student Zone on the big screen now. Walk through it as if you are a student. Then ask: 'When in your weekly schedule could this realistically happen?' Get a specific day and time from each facilitator — not 'sometime during the week.'">
+    <p class="slide-phase">Phase 4 — Teaching &amp; Habits</p>
+    <h2 class="slide-title">Hand It Over &amp; Make It Stick</h2>
+    <div class="cards">
+      <div class="card accent">
+        <span class="card-icon">🎓</span>
+        <h3>Student Zone</h3>
+        <p>Step-by-step pipeline, screenshots, plain language. Point students here on Day 1 — they can follow it independently.</p>
+      </div>
+      <div class="card accent">
+        <span class="card-icon">📋</span>
+        <h3>Cheat Sheet</h3>
+        <p>"Safari froze" → send them here. "What is a commit?" → send them here. It answers the questions so you don't have to.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <h3>GitHub Friday</h3>
+        <p>Pick a fixed time. <em>"Every Friday at 2 PM, we upload."</em> Name the ritual — rituals with names get done, vague ones get skipped.</p>
+      </div>
+    </div>
+    <div class="callout info">
+      <strong>🖥️ Show on Screen</strong>
+      Open The Hub Vault → Student Zone. Walk through it together before moving on.
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 24 — CLOSING: BOOKMARKS
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Closing" data-notes="Do this together, in real time, on everyone's iPad. Don't move to the next slide until every person has the Hub Vault bookmarked. It takes 60 seconds per person. This is the safety net — if they forget everything else, the bookmark leads them back.">
+    <p class="slide-phase">Closing — 14:45 to 15:00</p>
+    <h2 class="slide-title">The Bookmark Session</h2>
+    <p class="slide-subtitle">Do this now, on your iPad, while we're all here together.</p>
+    <div class="callout warning">
+      <strong>⚠️ Do Not Skip This</strong>
+      The Hub Vault is only useful if they can find it. A bookmark costs 10 seconds. Searching for a URL when a student is waiting costs 5 minutes of confusion.
+    </div>
+    <div class="cards cards-2">
+      <div class="card">
+        <span class="card-icon">📌</span>
+        <h3>How to Bookmark (iPad Safari)</h3>
+        <ol style="margin-top:8px; color: var(--text2);">
+          <li>Open the page in Safari</li>
+          <li>Tap the share icon → <strong>"Add Bookmark"</strong></li>
+          <li>Name it and tap <strong>Save</strong></li>
+        </ol>
+      </div>
+      <div class="card">
+        <span class="card-icon">🔖</span>
+        <h3>Three Bookmarks. That's It.</h3>
+        <ul style="margin-top:8px;">
+          <li>The Hub Vault</li>
+          <li>Your hub's GitHub repository</li>
+          <li>The Cheat Sheet page</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════
+       SLIDE 25 — CLOSING
+       ════════════════════════════════════════════════════════ -->
+  <div class="slide" data-phase="Closing" data-notes="Say it with energy. The challenge is verifiable — you can check their repos at the end of the week. Leave this slide up as people pack up. Send the Hub Vault URL in the group chat right now.">
+    <p class="slide-phase">Closing — Go Build the Vault</p>
+    <h2 class="slide-title">One Real Upload Before Sunday</h2>
+    <div class="cards">
+      <div class="card green">
+        <span class="card-icon">🏆</span>
+        <h3>The Challenge</h3>
+        <p>Upload one real document from your hub before Sunday. Not a test file — a real one. The commit timestamp tells the story.</p>
+      </div>
+      <div class="card accent">
+        <span class="card-icon">🗄️</span>
+        <h3>The Hub Vault</h3>
+        <p>Student Zone · Cheat Sheet · Glossary. Everything in one place. Bookmark it now before you leave.</p>
+      </div>
+      <div class="card amber">
+        <span class="card-icon">🛠️</span>
+        <h3>If Something Breaks</h3>
+        <ul style="margin-top:8px; font-size:.9rem;">
+          <li><strong>Upload fails:</strong> Check Wi-Fi, check file size</li>
+          <li><strong>File too big:</strong> Re-export at "Good" quality</li>
+          <li><strong>Can't find file:</strong> Files app → Recents</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout success" style="margin-top: 4px;">
+      <strong>✅ You Are Now a GitHub Facilitator</strong>
+      Every upload is a student who showed up. Every repository is a hub that took its work seriously. Go build the vault.
+    </div>
+  </div>
+
+</div><!-- end #stage -->
+
+<!-- ── Notes Panel ────────────────────────────────────────── -->
+<div id="notes-panel">
+  <strong>📝 Facilitator Notes</strong>
+  <p id="notes-content"></p>
+</div>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<div id="footer">
+  <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" disabled>← Prev</button>
+  <div class="slide-counter">
+    Slide <strong id="current-num">1</strong> of <strong id="total-num">22</strong>
+    <br/><span class="kbd">←</span> <span class="kbd">→</span> arrow keys
+  </div>
+  <button class="nav-btn primary" id="btn-next" onclick="navigate(1)">Next →</button>
+</div>
+
+</div><!-- end #presentation-card -->
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── Theme ─────────────────────────────────────────────── */
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    var btn = document.getElementById('theme-btn');
+    if(btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('hub-vault-theme', t);
+  }
+  document.getElementById('theme-btn').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+  applyTheme(localStorage.getItem('hub-vault-theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
+  /* ── Slides ────────────────────────────────────────────── */
+  var slides = Array.from(document.querySelectorAll('#stage .slide'));
+  var current = 0;
+  var notesVisible = false;
+
+  document.getElementById('total-num').textContent = slides.length;
+
+  function showSlide(idx){
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(idx, slides.length - 1));
+    var s = slides[current];
+    s.classList.add('active');
+
+    // Scroll stage to top
+    document.getElementById('stage').scrollTop = 0;
+
+    // Update counter
+    document.getElementById('current-num').textContent = current + 1;
+
+    // Update progress
+    document.getElementById('progress-fill').style.width =
+      ((current + 1) / slides.length * 100) + '%';
+
+    // Update phase label
+    document.getElementById('phase-label').textContent =
+      s.dataset.phase || 'Workshop';
+
+    // Update buttons
+    document.getElementById('btn-prev').disabled = current === 0;
+    document.getElementById('btn-next').disabled = current === slides.length - 1;
+
+    // Tall card for TOC slide only
+    document.getElementById('presentation-card').classList.toggle('tall', current === 1);
+
+    // Update notes
+    if(notesVisible){
+      var notes = s.dataset.notes || '';
+      document.getElementById('notes-content').textContent = notes || 'No notes for this slide.';
+    }
+  }
+
+  window.navigate = function(dir){ showSlide(current + dir); };
+  window.goToSlide = function(idx){ showSlide(idx); };
+
+  /* ── Notes Toggle ──────────────────────────────────────── */
+  document.getElementById('notes-toggle').addEventListener('click', function(){
+    notesVisible = !notesVisible;
+    var panel = document.getElementById('notes-panel');
+    var btn = document.getElementById('notes-toggle');
+    panel.classList.toggle('visible', notesVisible);
+    btn.classList.toggle('active', notesVisible);
+    if(notesVisible){
+      var notes = slides[current].dataset.notes || 'No notes for this slide.';
+      document.getElementById('notes-content').textContent = notes;
+    }
+  });
+
+  /* ── Keyboard ──────────────────────────────────────────── */
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault(); navigate(1);
+    } else if(e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault(); navigate(-1);
+    } else if(e.key === 'n' || e.key === 'N') {
+      document.getElementById('notes-toggle').click();
+    } else if(e.key === 'Home') {
+      e.preventDefault(); showSlide(0);
+    } else if(e.key === 'End') {
+      e.preventDefault(); showSlide(slides.length - 1);
+    }
+  });
+
+  /* ── Init ──────────────────────────────────────────────── */
+  showSlide(0);
+})();
+</script>
+</body>
+</html>
