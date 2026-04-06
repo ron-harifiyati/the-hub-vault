@@ -60,15 +60,35 @@
     body {
       height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
+      background: var(--bg2);
       color: var(--text);
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
       overflow: hidden;
       transition: background .2s, color .2s;
     }
+
+    /* ── Presentation Card ──────────────────────────────────── */
+    #presentation-card {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 940px;
+      height: min(700px, calc(100vh - 40px));
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 8px 48px var(--shadow);
+      overflow: hidden;
+      transition: height .3s ease;
+    }
+    #presentation-card.tall {
+      height: calc(100vh - 40px);
+    }
     ul, ol { padding-left: 1.4em; }
-    li { margin-bottom: .35em; color: var(--text2); line-height: 1.6; }
+    li { margin-bottom: .45em; color: var(--text2); line-height: 1.6; font-size: 1rem; }
     strong { color: var(--text); font-weight: 700; }
     code {
       font-family: 'SF Mono', 'Fira Code', monospace;
@@ -89,8 +109,9 @@
       padding: 0 24px;
       height: 56px;
       border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      background: var(--card);
       gap: 12px;
+      border-radius: 16px 16px 0 0;
     }
     .h-logo {
       font-weight: 800;
@@ -153,9 +174,9 @@
     /* ── Slides ────────────────────────────────────────────── */
     .slide {
       display: none;
-      min-height: 100%;
-      padding: 40px 24px 24px;
+      padding: 32px 28px 20px;
       max-width: 860px;
+      width: 100%;
       margin: 0 auto;
       animation: fadeIn .25s ease;
     }
@@ -248,15 +269,15 @@
       margin-bottom: 6px;
     }
     .slide-title {
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
       font-weight: 800;
       margin-bottom: 8px;
-      line-height: 1.2;
+      line-height: 1.15;
     }
     .slide-subtitle {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text2);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       max-width: 640px;
     }
 
@@ -265,20 +286,20 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 22px 20px;
       box-shadow: 0 2px 8px var(--shadow);
     }
-    .card-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
-    .card h3 { font-size: 1.05rem; margin-bottom: 6px; }
-    .card h4 { font-size: .95rem; margin-bottom: 6px; }
-    .card p { font-size: .9rem; color: var(--text2); margin: 0; }
+    .card-icon { font-size: 2.6rem; margin-bottom: 12px; display: block; }
+    .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .card h4 { font-size: 1.05rem; margin-bottom: 8px; }
+    .card p { font-size: 1rem; color: var(--text2); margin: 0; line-height: 1.5; }
     .card.accent { border-color: var(--accent); border-top: 3px solid var(--accent); }
     .card.green { border-top: 3px solid var(--green); }
     .card.amber { border-top: 3px solid var(--amber); }
@@ -301,20 +322,17 @@
     .callout.info { border-left-color: var(--blue); background: var(--blue-bg); }
     .callout.info strong { color: var(--blue); }
 
-    /* Steps */
-    .steps { list-style: none; padding: 0; }
-    .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
-    .step-num {
-      width: 36px; height: 36px;
+    /* Step badge (used inside cards on step slides) */
+    .step-badge {
+      width: 44px; height: 44px;
       background: var(--accent);
       color: #fff;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: .95rem;
-      flex-shrink: 0; margin-top: 2px;
+      font-weight: 800; font-size: 1.3rem;
+      margin-bottom: 12px;
+      flex-shrink: 0;
     }
-    .step-body h4 { font-size: 1rem; margin-bottom: 4px; }
-    .step-body p { font-size: .9rem; color: var(--text2); margin: 0; }
 
     /* TOC */
     .toc-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
@@ -357,7 +375,7 @@
 
     /* Comparison */
     .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-    .compare-col { border-radius: 10px; padding: 16px; }
+    .compare-col { border-radius: 10px; padding: 20px; }
     .compare-col.bad { background: rgba(239,68,68,.09); border: 1px solid rgba(239,68,68,.25); }
     .compare-col.good { background: var(--green-bg); border: 1px solid rgba(22,163,74,.25); }
     .compare-col h4 { margin-bottom: 10px; font-size: .9rem; }
@@ -400,8 +418,9 @@
       padding: 0 16px;
       height: 60px;
       border-top: 1px solid var(--border);
-      background: var(--bg);
+      background: var(--card);
       gap: 12px;
+      border-radius: 0 0 16px 16px;
     }
     .nav-btn {
       display: flex; align-items: center; gap: 6px;
@@ -459,6 +478,9 @@
 </head>
 <body>
 
+<!-- ── Presentation Card ──────────────────────────────────── -->
+<div id="presentation-card">
+
 <!-- ── Header ─────────────────────────────────────────────── -->
 <div id="header">
   <div class="h-logo">🗄️ The <span>Hub Vault</span></div>
@@ -502,32 +524,32 @@
         <span class="toc-time">10:00–10:45</span>
         <div><h4>Phase 1: The "Why" &amp; The Digital Vault</h4><p>What GitHub is, the iPad wipe problem, the Receipts demo</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(8)">
+      <li class="toc-item" onclick="goToSlide(6)">
         <div class="toc-dot orange"></div>
         <span class="toc-time">10:45–11:30</span>
         <div><h4>Phase 2: The iPad-to-GitHub Pipeline</h4><p>Live demo + everyone uploads their first PDF</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(15)">
+      <li class="toc-item" onclick="goToSlide(13)">
         <div class="toc-dot gray"></div>
         <span class="toc-time">11:30–11:45</span>
         <div><h4>☕ Break</h4><p>15 minutes</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(16)">
+      <li class="toc-item" onclick="goToSlide(14)">
         <div class="toc-dot blue"></div>
         <span class="toc-time">11:45–13:00</span>
         <div><h4>Phase 3: Ownership — Creating Hub Repos</h4><p>Everyone builds their own hub repository</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(20)">
+      <li class="toc-item" onclick="goToSlide(17)">
         <div class="toc-dot gray"></div>
         <span class="toc-time">13:00–14:00</span>
         <div><h4>🍽️ Lunch</h4><p>1 hour</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(21)">
+      <li class="toc-item" onclick="goToSlide(18)">
         <div class="toc-dot green"></div>
         <span class="toc-time">14:00–14:45</span>
         <div><h4>Phase 4: Training the Trainers</h4><p>Scenario practice, student handover, weekly routines</p></div>
       </li>
-      <li class="toc-item" onclick="goToSlide(24)">
+      <li class="toc-item" onclick="goToSlide(20)">
         <div class="toc-dot amber"></div>
         <span class="toc-time">14:45–15:00</span>
         <div><h4>Closing &amp; The Golden Link</h4><p>Bookmarks, call to action, send-off</p></div>
@@ -549,21 +571,17 @@
       <div class="compare-col bad">
         <h4>❌ Without GitHub</h4>
         <ul>
-          <li>Work lives only on the iPad</li>
           <li>iPad gets wiped — everything gone</li>
-          <li>Student has no proof of their progress</li>
-          <li>"I did the work" — but can't show it</li>
-          <li>Sponsor can't see what their money funded</li>
+          <li>No proof. No portfolio. No record.</li>
+          <li>Sponsors can't see what their money funded</li>
         </ul>
       </div>
       <div class="compare-col good">
         <h4>✅ With GitHub</h4>
         <ul>
-          <li>Work is in the cloud, permanent</li>
           <li>iPad wipe? Doesn't matter</li>
-          <li>Student has a timestamped public portfolio</li>
-          <li>Every upload is a receipt with a date and time</li>
-          <li>Sponsor can see everything, from anywhere</li>
+          <li>Every upload is timestamped — permanent proof</li>
+          <li>Sponsors see everything, from anywhere, no login</li>
         </ul>
       </div>
     </div>
@@ -584,78 +602,47 @@
       <div class="card accent">
         <span class="card-icon">📁</span>
         <h3>The Folder</h3>
-        <p>A cloud home for project files. Like Google Drive — but built for professional creators. Everything in one place, accessible from any device.</p>
+        <p>Cloud storage for every project file — accessible from any device, forever.</p>
       </div>
       <div class="card accent">
         <span class="card-icon">⏳</span>
         <h3>The Time Machine</h3>
-        <p>It remembers every version of every file. Delete a slide on Monday — GitHub has it from Sunday. Nothing is ever truly lost.</p>
+        <p>Delete a slide Monday — GitHub has it from Sunday. Nothing is ever truly lost.</p>
       </div>
       <div class="card accent">
         <span class="card-icon">🛂</span>
         <h3>The Digital Passport</h3>
-        <p>How MCRI and employers see a student before they meet them. A filled GitHub profile says: <em>"I showed up. I did the work. Here is the proof."</em></p>
+        <p><em>"I showed up. I did the work. Here is the proof."</em></p>
       </div>
     </div>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
-       SLIDE 5 — THE TOUR
+       SLIDE 5 — THE TOUR + THE RECEIPTS
        ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Phase 1 — The Why" data-notes="This is a LIVE demo moment. Open the pre-filled Hub Repository on the big screen NOW. Narrate as you scroll: 'This is what a finished repo looks like. See the file list? See the README? This is the standard your hub will reach today.'">
-    <p class="slide-phase">Phase 1 — The Tour</p>
+  <div class="slide" data-phase="Phase 1 — The Why" data-notes="Open the demo repository on the big screen NOW. Narrate as you scroll. Then click the Commits count — show the timestamp list. Say: 'This student uploaded at 2:47 PM on a Tuesday. That is a receipt. That is what we are building today.'">
+    <p class="slide-phase">Phase 1 — The Live Demo</p>
     <h2 class="slide-title">What a Real Repository Looks Like</h2>
-    <p class="slide-subtitle">Open the demo repository on the big screen now.</p>
-    <div class="cards cards-2">
+    <div class="cards">
       <div class="card">
         <span class="card-icon">📂</span>
         <h3>The File List</h3>
-        <p>Every uploaded file is visible here. Scroll down to see PDFs, reports, and photos — all in one place. No email required.</p>
+        <p>Every uploaded PDF in one place. No email. No WhatsApp. Just a link.</p>
       </div>
       <div class="card">
         <span class="card-icon">📖</span>
         <h3>The README</h3>
-        <p>The front cover of the repository. It tells visitors what this hub is, who runs it, and what you will find here. Like a welcome sign.</p>
+        <p>The front cover. Tells visitors what this hub is and what they'll find here.</p>
       </div>
-    </div>
-    <div class="callout info">
-      <strong>🖥️ Show on Screen</strong>
-      Navigate to the demo repository URL now. Point out: the repository name, the file list, the README below it, and the green "Code" button (we won't need it — that's for developers).
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════════════════════
-       SLIDE 6 — THE RECEIPTS
-       ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Phase 1 — The Why" data-notes="Click the Commits count on the demo repo LIVE. Show the list scrolling. Point to a timestamp. Say: 'This student uploaded at 2:47 PM on a Tuesday. That is a receipt. That is discipline. That is what we are building today.'">
-    <p class="slide-phase">Phase 1 — The Receipts</p>
-    <h2 class="slide-title">The Commits Tab: Your Evidence Log</h2>
-    <p class="slide-subtitle">Every upload creates a permanent, timestamped record. These are the receipts.</p>
-    <div class="cards cards-2">
       <div class="card green">
         <span class="card-icon">🕐</span>
-        <h3>What a Commit Shows</h3>
-        <ul style="margin-top:8px;">
-          <li>Who uploaded it</li>
-          <li>What the file was</li>
-          <li>The exact date and time</li>
-          <li>A message describing the work</li>
-        </ul>
-      </div>
-      <div class="card green">
-        <span class="card-icon">📊</span>
-        <h3>How You Use It</h3>
-        <ul style="margin-top:8px;">
-          <li>Check if a student submitted on time</li>
-          <li>Show sponsors the pace of activity</li>
-          <li>Prove the hub is active without a phone call</li>
-          <li>Replace "I sent the email" with a link</li>
-        </ul>
+        <h3>The Commits Tab</h3>
+        <p>Every upload is timestamped. Who uploaded, what file, exact date and time. These are the receipts.</p>
       </div>
     </div>
     <div class="callout warning">
-      <strong>⚠️ Facilitator Note</strong>
-      "I did the work" is a claim. A commit dated Tuesday at 2:47 PM is evidence. Teach your students this difference from day one.
+      <strong>⚠️ The Rule</strong>
+      "I did the work" is a claim. A commit dated Tuesday at 2:47 PM is evidence. Teach this difference from day one.
     </div>
   </div>
 
@@ -673,17 +660,17 @@
       <div class="card">
         <span class="card-icon">✅</span>
         <h3>Already Logged In</h3>
-        <p>Open Safari → go to <code>github.com</code> → confirm your profile picture appears in the top right. You're ready.</p>
+        <p>Open Safari → <code>github.com</code> → profile picture in top right. You're ready.</p>
       </div>
       <div class="card">
         <span class="card-icon">🔑</span>
         <h3>Forgot Password</h3>
-        <p>Tap "Forgot password" on the GitHub sign-in page. Check your email. If the email isn't accessible, pair with a buddy now — do not stall the group.</p>
+        <p>Tap "Forgot password" → check email. Can't access email? Pair with a buddy now.</p>
       </div>
       <div class="card">
         <span class="card-icon">🆕</span>
         <h3>No Account Yet</h3>
-        <p>Go to <code>github.com</code> → tap "Sign up." Username must be professional: <code>TendaiMoyo</code> not <code>coolkid99</code>. Takes 3 minutes.</p>
+        <p><code>github.com</code> → "Sign up." Username must be professional: <code>TendaiMoyo</code> not <code>coolkid99</code>.</p>
       </div>
     </div>
   </div>
@@ -695,36 +682,28 @@
     <p class="slide-phase">Phase 2 — 10:45 to 11:30</p>
     <h2 class="slide-title">The iPad-to-GitHub Pipeline</h2>
     <p class="slide-subtitle">Four steps. This is the workflow your students will repeat every week.</p>
-    <ul class="steps">
-      <li class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>Keynote — Create the Work</h4>
-          <p>Build or open a presentation. For this demo: a single slide saying "Hello from [Your Hub]."</p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>Export — Convert to PDF</h4>
-          <p>Tap ··· → Export → PDF → Good quality. Critical: Keynote files only open in Keynote. PDFs open everywhere.</p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>Save — Store in Files App</h4>
-          <p>Tap "Save to Files." Give it a clear name: <code>Hello-HarareHub-YourName.pdf</code></p>
-        </div>
-      </li>
-      <li class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>Upload — Push to GitHub</h4>
-          <p>Open Safari → hub repo → Add file → Upload files → select the PDF → write commit message → Commit.</p>
-        </div>
-      </li>
-    </ul>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Keynote — Create</h3>
+        <p>One slide: "Hello from [Your Hub]." Any theme, any size.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Export — PDF</h3>
+        <p>Tap ··· → Export → PDF → <strong>Good</strong> quality. PDFs open everywhere — Keynote files don't.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Save — Files App</h3>
+        <p>Save to Files with a clear name: <code>Hello-HarareHub-YourName.pdf</code></p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Upload — GitHub</h3>
+        <p>Safari → repo → Add file → Upload → select PDF → commit message → Commit.</p>
+      </div>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
@@ -767,27 +746,31 @@
   <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="This is the step most people get wrong — they pick 'Best' quality and their file is 50MB and won't upload. Say this clearly: 'Good quality. Not Best. Good.' Point at the slide.">
     <p class="slide-phase">Phase 2 — Step 2</p>
     <h2 class="slide-title">Export as PDF from Keynote</h2>
-    <ul class="steps">
-      <li class="step">
-        <div class="step-num">1</div>
-        <div class="step-body"><h4>Tap the three dots (···)</h4><p>Top-right corner of Keynote — the overflow menu</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">2</div>
-        <div class="step-body"><h4>Tap "Export"</h4><p>Then select <strong>PDF</strong> from the format options</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">3</div>
-        <div class="step-body"><h4>Choose Quality: GOOD — not Best</h4><p>Best = 50MB+ file. Good = under 5MB. GitHub's browser upload limit is 25MB. Always choose Good.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">4</div>
-        <div class="step-body"><h4>Tap Export again to confirm</h4><p>The PDF is now being generated. A share sheet will appear next.</p></div>
-      </li>
-    </ul>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Tap the three dots (···)</h3>
+        <p>Top-right corner of Keynote — the overflow menu.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Tap "Export" → PDF</h3>
+        <p>Select PDF from the format options.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Choose Quality: GOOD</h3>
+        <p>Best = 50MB+. Good = under 5MB. GitHub limit is 25MB. <strong>Always choose Good.</strong></p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Tap Export to confirm</h3>
+        <p>PDF is generated. A share sheet appears next.</p>
+      </div>
+    </div>
     <div class="callout warning">
-      <strong>⚠️ Quality Selector — Say This Out Loud</strong>
-      "Tap Good. Not Best. Good. If you tap Best, your file will be too large to upload and you will have to start the export again."
+      <strong>⚠️ Say this out loud</strong>
+      "Good. Not Best. Good. Best = file too large to upload."
     </div>
   </div>
 
@@ -797,27 +780,31 @@
   <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="The most common issue here: people tap 'Save to Files' and don't know where it saved. Tell them: On My iPad → Keynote is where it usually goes. OR use the Recents section. Name the file properly — this matters for finding it in the next step.">
     <p class="slide-phase">Phase 2 — Step 3</p>
     <h2 class="slide-title">Save to the Files App</h2>
-    <ul class="steps">
-      <li class="step">
-        <div class="step-num">1</div>
-        <div class="step-body"><h4>From the share sheet, tap "Save to Files"</h4><p>The share sheet appears after you complete the export. Look for the Files icon.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">2</div>
-        <div class="step-body"><h4>Choose your save location</h4><p>Tap <strong>On My iPad</strong> or <strong>iCloud Drive</strong>. Either works — just remember which one.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">3</div>
-        <div class="step-body"><h4>Rename the file before saving</h4><p>Use a clear, professional name: <code>Hello-HarareHub-TendaiMoyo.pdf</code> — Hub name + Your name. No spaces.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">4</div>
-        <div class="step-body"><h4>Tap Save</h4><p>Your PDF is now in the Files app. Open Files to confirm it's there before switching to Safari.</p></div>
-      </li>
-    </ul>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Tap "Save to Files"</h3>
+        <p>From the share sheet after export. Look for the Files icon.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Choose save location</h3>
+        <p><strong>On My iPad</strong> or <strong>iCloud Drive</strong>. Either works — remember which.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Rename the file</h3>
+        <p><code>Hello-HarareHub-TendaiMoyo.pdf</code> — Hub + Name. No spaces.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Tap Save — then verify</h3>
+        <p>Open Files app and confirm your PDF is there before switching to Safari.</p>
+      </div>
+    </div>
     <div class="callout">
       <strong>💡 Quick Check</strong>
-      Before moving to Step 4, open the Files app and find your PDF. Don't proceed until you can see it. One minute of confirmation saves five minutes of frustration.
+      Don't move to Step 4 until you can see your PDF in the Files app.
     </div>
   </div>
 
@@ -827,24 +814,28 @@
   <div class="slide" data-phase="Phase 2 — The Pipeline" data-notes="Write the collaboration repo URL on a whiteboard or post it in your group chat NOW so everyone can navigate to it. Don't make them type it from memory.">
     <p class="slide-phase">Phase 2 — Step 4</p>
     <h2 class="slide-title">Upload to GitHub in Safari</h2>
-    <ul class="steps">
-      <li class="step">
-        <div class="step-num">1</div>
-        <div class="step-body"><h4>Open Safari → navigate to the Collaboration Repo</h4><p>Use the URL posted on screen or in the group chat. Make sure you're logged in.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">2</div>
-        <div class="step-body"><h4>Tap "Add file" → "Upload files"</h4><p>This button is near the top of the file list. If you don't see it, you may not be logged in.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">3</div>
-        <div class="step-body"><h4>Tap "choose your files" → find your PDF</h4><p>Navigate: On My iPad → Keynote → select your file. Or use Recents at the top of the Files picker.</p></div>
-      </li>
-      <li class="step">
-        <div class="step-num">4</div>
-        <div class="step-body"><h4>Write a commit message → tap "Commit changes"</h4><p>Message: <em>"Hello from [Hub Name] — [Your Name]"</em>. Then tap the green Commit button.</p></div>
-      </li>
-    </ul>
+    <div class="cards">
+      <div class="card">
+        <span class="step-badge">1</span>
+        <h3>Open Safari → Collaboration Repo</h3>
+        <p>Use the URL on screen or in the group chat. Confirm you're logged in.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">2</span>
+        <h3>Tap "Add file" → "Upload files"</h3>
+        <p>Near the top of the file list. Don't see it? You're not logged in.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">3</span>
+        <h3>Find your PDF</h3>
+        <p>On My iPad → Keynote → select file. Or use Recents at the top of the picker.</p>
+      </div>
+      <div class="card">
+        <span class="step-badge">4</span>
+        <h3>Write commit message → Commit</h3>
+        <p><em>"Hello from [Hub Name] — [Your Name]"</em> → tap the green Commit button.</p>
+      </div>
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
@@ -892,13 +883,13 @@
     <div class="cards cards-2">
       <div class="card">
         <span class="card-icon">🎯</span>
-        <h3>What They Just Proved</h3>
-        <p>20+ files from 20+ different people — all in one place, all permanent, all timestamped. No email. No WhatsApp. No "can you send it again." Just: a link.</p>
+        <h3>What Just Happened</h3>
+        <p>20+ files. 20+ people. One link. No email, no WhatsApp, no "can you send it again."</p>
       </div>
       <div class="card">
         <span class="card-icon">💬</span>
-        <h3>The Point to Make</h3>
-        <p>This is what your students will see when you show them their collective progress. Every PDF is someone who showed up. The repository is proof of a community, not just a folder.</p>
+        <h3>The Point</h3>
+        <p>Every PDF is someone who showed up. The repository is proof of a community.</p>
       </div>
     </div>
   </div>
@@ -973,6 +964,10 @@
         </div>
       </div>
     </div>
+    <div class="callout info" style="margin-top: 4px;">
+      <strong>📋 Checkpoint — Before Moving On</strong>
+      Post your repository URL in the group chat now. We'll spot-check 3 on the big screen together.
+    </div>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
@@ -985,17 +980,17 @@
       <div class="card">
         <span class="card-icon">✏️</span>
         <h3>Editing a File</h3>
-        <p>Click the file → click the pencil icon (✏️). Works best for text files like README. For PDFs, just upload a new version.</p>
+        <p>Click file → pencil icon. For PDFs: just upload a new version instead.</p>
       </div>
       <div class="card">
         <span class="card-icon">🗑️</span>
         <h3>Deleting a File</h3>
-        <p>Click the file → click the trash icon. <strong>Important:</strong> the file is removed from the view but stays in the commit history. Nothing is truly erased.</p>
+        <p>Removed from view — but stays in commit history forever. Nothing is truly erased.</p>
       </div>
       <div class="card">
         <span class="card-icon">🔒</span>
         <h3>Public vs. Private</h3>
-        <p><strong>Public:</strong> anyone can see it — no login. Use for hub repos so sponsors can access easily. <strong>Private:</strong> only you and invited people. Use for personal drafts.</p>
+        <p><strong>Hub repos = Public.</strong> Sponsors must see the work without needing a GitHub login.</p>
       </div>
     </div>
     <div class="callout warning">
@@ -1005,38 +1000,7 @@
   </div>
 
   <!-- ════════════════════════════════════════════════════════
-       SLIDE 19 — PHASE 3 CHECKPOINT
-       ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Phase 3 — Ownership" data-notes="Do a live check — ask each facilitator to share their repo URL in the group chat right now. Open 3–4 of them on the big screen to show variety and validate. This creates social accountability before lunch.">
-    <p class="slide-phase">Phase 3 — Checkpoint</p>
-    <h2 class="slide-title">Before Lunch: Share Your Repo URL</h2>
-    <div class="callout success">
-      <strong>✅ 5-Minute Check Before Lunch</strong>
-      Every facilitator should post their repository URL in the group chat right now. We will spot-check 3–4 on the big screen together.
-    </div>
-    <div class="cards cards-2">
-      <div class="card green">
-        <h4>You're Ready If...</h4>
-        <ul style="margin-top:8px;">
-          <li>Your hub repo is live and public</li>
-          <li>It has at least 1 commit (the mock report)</li>
-          <li>The README has your hub name in it</li>
-          <li>You can find the Commits count</li>
-        </ul>
-      </div>
-      <div class="card amber">
-        <h4>Still Working?</h4>
-        <ul style="margin-top:8px;">
-          <li>Finish during lunch if needed</li>
-          <li>Pair with the facilitator next to you</li>
-          <li>Come back 10 minutes early from lunch</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════════════════════
-       SLIDE 20 — LUNCH
+       SLIDE 19 — LUNCH
        ════════════════════════════════════════════════════════ -->
   <div class="slide slide-break" data-phase="Lunch" data-notes="During lunch: identify the 2–3 most confident facilitators. Ask them if they'd be willing to be 'Floor Helpers' for Phase 4 — walking the room while you present. This multiplies your reach significantly.">
     <div class="break-icon">🍽️</div>
@@ -1058,11 +1022,11 @@
     <div class="cards cards-2">
       <div class="card">
         <h4>Without GitHub</h4>
-        <p>There is nothing you can do. The work is gone. The student has no proof, no portfolio, no record. The cohort ends and they have nothing to show the MCRI.</p>
+        <p>Nothing you can do. The work is gone. No proof, no portfolio, no record.</p>
       </div>
       <div class="card green">
         <h4>With GitHub</h4>
-        <p>You check their repository. If they committed the PDF — it's there, timestamped, permanent. If they didn't commit it — this is the teachable moment. This is the lesson they will never forget.</p>
+        <p>Check the repo. Committed? It's there — timestamped, permanent. Not committed? That's the lesson they never forget.</p>
       </div>
     </div>
     <div class="callout">
@@ -1072,57 +1036,31 @@
   </div>
 
   <!-- ════════════════════════════════════════════════════════
-       SLIDE 22 — THE HANDOVER
+       SLIDE 22 — THE HANDOVER + WEEKLY ROUTINE
        ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Phase 4 — Training" data-notes="Open the Hub Vault site on the big screen now. Walk through the Student Zone page as if you are a student. This is the exact tool they will hand to students on Day 1. Emphasise: they don't need to remember everything — the site remembers it for them.">
-    <p class="slide-phase">Phase 4 — The Student Handover</p>
-    <h2 class="slide-title">The Hub Vault: Your Teaching Tool</h2>
-    <p class="slide-subtitle">You don't need to memorise the 4-step pipeline. Your students have a guide. You just need to point them to it.</p>
-    <div class="cards cards-2">
+  <div class="slide" data-phase="Phase 4 — Training" data-notes="Open the Hub Vault → Student Zone on the big screen now. Walk through it as if you are a student. Then ask: 'When in your weekly schedule could this realistically happen?' Get a specific day and time from each facilitator — not 'sometime during the week.'">
+    <p class="slide-phase">Phase 4 — Teaching &amp; Habits</p>
+    <h2 class="slide-title">Hand It Over &amp; Make It Stick</h2>
+    <div class="cards">
       <div class="card accent">
         <span class="card-icon">🎓</span>
         <h3>Student Zone</h3>
-        <p>Step-by-step pipeline with screenshots. Mini-Challenge checklist. Written in plain language, no jargon. Students can follow it independently.</p>
+        <p>Step-by-step pipeline, screenshots, plain language. Point students here on Day 1 — they can follow it independently.</p>
       </div>
       <div class="card accent">
         <span class="card-icon">📋</span>
         <h3>Cheat Sheet</h3>
-        <p>Glossary + troubleshooting. When a student says "Safari froze" — send them here. When they ask "what is a commit?" — send them here.</p>
+        <p>"Safari froze" → send them here. "What is a commit?" → send them here. It answers the questions so you don't have to.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">📅</span>
+        <h3>GitHub Friday</h3>
+        <p>Pick a fixed time. <em>"Every Friday at 2 PM, we upload."</em> Name the ritual — rituals with names get done, vague ones get skipped.</p>
       </div>
     </div>
     <div class="callout info">
-      <strong>🖥️ Show on Screen Now</strong>
-      Open The Hub Vault → Student Zone. Walk through the page together. Identify the image placeholders — these are where you (facilitators) will add screenshots of your own iPad UI over time.
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════════════════════
-       SLIDE 23 — WEEKLY ROUTINE
-       ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Phase 4 — Training" data-notes="Ask the room: 'When in your weekly schedule could this realistically happen?' Let facilitators suggest times. The goal is for each person to commit to a specific day and time — not 'sometime during the week.' Vague commitments don't get done.">
-    <p class="slide-phase">Phase 4 — Weekly Routine</p>
-    <h2 class="slide-title">Integrating GitHub Into Every Week</h2>
-    <p class="slide-subtitle">The workflow only works if it becomes a habit. Here's how to build that habit at your hub.</p>
-    <div class="cards">
-      <div class="card">
-        <span class="card-icon">📅</span>
-        <h3>For Students</h3>
-        <p>Set a fixed time: <em>"Every Friday at 2 PM, we upload our Keynotes."</em> Consistency is more important than perfection. One upload per week, every week, builds an undeniable record.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">📊</span>
-        <h3>For Facilitators</h3>
-        <p>Every Friday: write the week's report, export as PDF, upload to the hub repo, share the repo URL with sponsors. Replace the email attachment habit with the link habit.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">👀</span>
-        <h3>Monitoring</h3>
-        <p>At the start of each session, pull up 2–3 student commit histories on the big screen. Showing students their own record of growth is the strongest motivational tool you have.</p>
-      </div>
-    </div>
-    <div class="callout">
-      <strong>💡 Make It a Ritual</strong>
-      Name it. "GitHub Friday." "Upload Day." Whatever sticks. Rituals that have names get done. Rituals that are vague get skipped.
+      <strong>🖥️ Show on Screen</strong>
+      Open The Hub Vault → Student Zone. Walk through it together before moving on.
     </div>
   </div>
 
@@ -1139,86 +1077,56 @@
     </div>
     <div class="cards cards-2">
       <div class="card">
-        <h4>📌 How to Bookmark in Safari (iPad)</h4>
+        <span class="card-icon">📌</span>
+        <h3>How to Bookmark (iPad Safari)</h3>
         <ol style="margin-top:8px; color: var(--text2);">
-          <li>Open Safari → go to The Hub Vault</li>
-          <li>Tap the share icon (□ with arrow up)</li>
-          <li>Tap <strong>"Add Bookmark"</strong></li>
-          <li>Name it: <em>Hub Vault</em></li>
-          <li>Tap <strong>Save</strong></li>
+          <li>Open the page in Safari</li>
+          <li>Tap the share icon → <strong>"Add Bookmark"</strong></li>
+          <li>Name it and tap <strong>Save</strong></li>
         </ol>
       </div>
       <div class="card">
-        <h4>📌 Also Bookmark</h4>
+        <span class="card-icon">🔖</span>
+        <h3>Three Bookmarks. That's It.</h3>
         <ul style="margin-top:8px;">
-          <li>Your hub's own GitHub repository</li>
-          <li>The shared Collaboration Repo URL</li>
-          <li>The Cheat Sheet page directly</li>
+          <li>The Hub Vault</li>
+          <li>Your hub's GitHub repository</li>
+          <li>The Cheat Sheet page</li>
         </ul>
-        <p style="margin-top:10px;">Three bookmarks. That's all they need for day-to-day workflow.</p>
       </div>
     </div>
   </div>
 
   <!-- ════════════════════════════════════════════════════════
-       SLIDE 25 — THE CALL TO ACTION
+       SLIDE 25 — CLOSING
        ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Closing" data-notes="This is your close. Say it with energy. The challenge is concrete, achievable, and verifiable. You can check their repos at the end of the week to see who actually did it. Close by reading the Impact Statement out loud.">
-    <p class="slide-phase">Closing — The Challenge</p>
+  <div class="slide" data-phase="Closing" data-notes="Say it with energy. The challenge is verifiable — you can check their repos at the end of the week. Leave this slide up as people pack up. Send the Hub Vault URL in the group chat right now.">
+    <p class="slide-phase">Closing — Go Build the Vault</p>
     <h2 class="slide-title">One Real Upload Before Sunday</h2>
-    <div class="callout success">
-      <strong>🏆 Your Challenge</strong>
-      Upload one real report or document from your hub to your repository before the end of this week. Not a test file — a real one. The commit timestamp will tell the story.
-    </div>
-    <div class="cards cards-2">
-      <div class="card">
-        <h4>What Counts</h4>
-        <ul style="margin-top:8px;">
-          <li>A real facilitator weekly report</li>
-          <li>A schedule for the next session</li>
-          <li>A student list (no personal data)</li>
-          <li>Any professional document from your hub</li>
-        </ul>
-      </div>
-      <div class="card green">
-        <h4>The Vision</h4>
-        <p style="font-style: italic; color: var(--text2);">"You are not just managing a workshop. You are building a developer ecosystem — one commit at a time. Every upload is a student who showed up. Every repository is a hub that took its work seriously. GitHub is the evidence."</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════════════════════════════════════════════
-       SLIDE 26 — SAFETY NET / RESOURCES
-       ════════════════════════════════════════════════════════ -->
-  <div class="slide" data-phase="Resources" data-notes="Leave this slide up as people pack up and leave. It's the 'final frame' — the last thing they see. Send the Hub Vault URL in the group chat right now so it's in their messages.">
-    <p class="slide-phase">Your Safety Net</p>
-    <h2 class="slide-title">Everything You Need Is One Tap Away</h2>
     <div class="cards">
+      <div class="card green">
+        <span class="card-icon">🏆</span>
+        <h3>The Challenge</h3>
+        <p>Upload one real document from your hub before Sunday. Not a test file — a real one. The commit timestamp tells the story.</p>
+      </div>
       <div class="card accent">
         <span class="card-icon">🗄️</span>
         <h3>The Hub Vault</h3>
-        <p>Your complete reference site. Student Zone, Facilitator Portal, Cheat Sheet, Glossary — all in one place. Bookmark it.</p>
-      </div>
-      <div class="card accent">
-        <span class="card-icon">📋</span>
-        <h3>4-Step Quick Reference</h3>
-        <p><strong>1.</strong> Keynote → <strong>2.</strong> Export PDF (Good) → <strong>3.</strong> Save to Files → <strong>4.</strong> Upload to GitHub + Commit message</p>
+        <p>Student Zone · Cheat Sheet · Glossary. Everything in one place. Bookmark it now before you leave.</p>
       </div>
       <div class="card amber">
         <span class="card-icon">🛠️</span>
         <h3>If Something Breaks</h3>
-        <ul style="margin-top:8px; font-size:.85rem;">
-          <li><strong>Upload fails:</strong> Check Wi-Fi, check file size, refresh Safari</li>
-          <li><strong>File too big:</strong> Re-export at "Good" quality (not Best)</li>
-          <li><strong>Can't find file:</strong> Open Files app → Recents</li>
-          <li><strong>Safari frozen:</strong> Close Safari, reopen, try again</li>
-          <li><strong>Locked out:</strong> Use Recovery Codes (written in your notebook)</li>
+        <ul style="margin-top:8px; font-size:.9rem;">
+          <li><strong>Upload fails:</strong> Check Wi-Fi, check file size</li>
+          <li><strong>File too big:</strong> Re-export at "Good" quality</li>
+          <li><strong>Can't find file:</strong> Files app → Recents</li>
         </ul>
       </div>
     </div>
     <div class="callout success" style="margin-top: 4px;">
       <strong>✅ You Are Now a GitHub Facilitator</strong>
-      The work you did today — the uploads, the repos, the commits — is proof. Go build the vault.
+      Every upload is a student who showed up. Every repository is a hub that took its work seriously. Go build the vault.
     </div>
   </div>
 
@@ -1234,11 +1142,13 @@
 <div id="footer">
   <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" disabled>← Prev</button>
   <div class="slide-counter">
-    Slide <strong id="current-num">1</strong> of <strong id="total-num">26</strong>
+    Slide <strong id="current-num">1</strong> of <strong id="total-num">22</strong>
     <br/><span class="kbd">←</span> <span class="kbd">→</span> arrow keys
   </div>
   <button class="nav-btn primary" id="btn-next" onclick="navigate(1)">Next →</button>
 </div>
+
+</div><!-- end #presentation-card -->
 
 <script>
 (function(){
@@ -1288,6 +1198,9 @@
     // Update buttons
     document.getElementById('btn-prev').disabled = current === 0;
     document.getElementById('btn-next').disabled = current === slides.length - 1;
+
+    // Tall card for TOC slide only
+    document.getElementById('presentation-card').classList.toggle('tall', current === 1);
 
     // Update notes
     if(notesVisible){
